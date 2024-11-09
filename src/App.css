@@ -1,0 +1,17 @@
+.cvInput {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+  width: 500px;
+}
+
+.cvInputHeading {
+  display: inline-flex;
+  justify-content: space-between;
+  height: fit-content;
+}
+
+.cvInputHeading div > * {
+  margin: 0;
+}
