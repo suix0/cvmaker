@@ -1,5 +1,6 @@
 const educationData = [
   {
+    id: 0,
     institution: "University of the Philippines",
     courseTitle: "Master of Science in Information Technology",
     description:
@@ -8,6 +9,7 @@ const educationData = [
     grade: "Distiction (Expected)",
   },
   {
+    id: 1,
     institution: "De La Salle University ",
     courseTitle: "Bachelor of Science in Computer Science",
     description:
