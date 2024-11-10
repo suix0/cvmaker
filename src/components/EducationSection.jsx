@@ -1,73 +1,18 @@
 import { useState } from "react";
-import educationData from "./data/EducationData";
-
-function PersonalInformation({ isActive, onShow }) {
-  const [personalInfo, setPersonalInfo] = useState({
-    name: "John Doe",
-    number: "09213210982",
-    email: "johndoe@gmail.com",
-    socialMedia: "https://github.com/johndoe",
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setPersonalInfo({ ...personalInfo, [name]: value });
-  }
-
-  return (
-    <section onClick={onShow}>
-      <h1>Personal Information</h1>
-      {isActive && (
-        <form>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              value={personalInfo.name}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="number">Mobile No.</label>
-            <input
-              type="number"
-              name="number"
-              id="number"
-              value={personalInfo.number}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={personalInfo.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="socialMedia">Social Media</label>
-            <input
-              type="text"
-              name="socialMedia"
-              id="socialMedia"
-              value={personalInfo.socialMedia}
-              onChange={handleChange}
-            />
-          </div>
-        </form>
-      )}
-    </section>
-  );
-}
+import educationData from "../data/EducationData";
 
 function EducationInformation({ isActive, onShow }) {
   const [activeEdit, setActiveEdit] = useState(null);
   const [initialEducationData, setEducationData] = useState(educationData);
+  const [nextId, setNextId] = useState(3);
+  const [newData, setNewData] = useState({
+    id: nextId,
+    institution: "",
+    courseTitle: "",
+    description: "",
+    date: "",
+    grade: "",
+  });
 
   function inputHandler(e) {
     const {
@@ -83,7 +28,28 @@ function EducationInformation({ isActive, onShow }) {
         return education;
       }
     });
+
     setEducationData(newEducationData);
+  }
+
+  function newDataInputHandler(e) {
+    const { name, value } = e.target;
+    setNewData({ ...newData, [name]: value });
+  }
+
+  function newDataSubmitHandler(e) {
+    e.preventDefault();
+    setEducationData([...initialEducationData, newData]);
+    setNextId(nextId + 1);
+    setNewData({
+      id: nextId + 1,
+      institution: "",
+      courseTitle: "",
+      description: "",
+      date: "",
+      grade: "",
+    });
+    setActiveEdit(null);
   }
 
   return (
@@ -101,9 +67,79 @@ function EducationInformation({ isActive, onShow }) {
             index={education.id}
             isActiveEdit={activeEdit === education.id}
             onEdit={() => setActiveEdit(education.id)}
+            onCancel={() => setActiveEdit(null)}
             changeHandler={inputHandler}
           ></EducationSection>
         ))}
+      {activeEdit === 0 ? (
+        <form onSubmit={newDataSubmitHandler}>
+          <p>Add Education</p>
+          <div>
+            <label htmlFor="institution">Institution</label>
+            <input
+              type="text"
+              name="institution"
+              id="institution"
+              value={newData.institution}
+              onChange={newDataInputHandler}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="courseTitle">Course Title</label>
+            <input
+              type="text"
+              name="courseTitle"
+              id="courseTitle"
+              value={newData.courseTitle}
+              onChange={newDataInputHandler}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              value={newData.description}
+              onChange={newDataInputHandler}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="date">Date</label>
+            <input
+              type="text"
+              name="date"
+              id="date"
+              value={newData.date}
+              onChange={newDataInputHandler}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="grade">Grade</label>
+            <input
+              type="text"
+              name="grade"
+              id="grade"
+              value={newData.grade}
+              onChange={newDataInputHandler}
+            />
+          </div>
+
+          <button onClick={() => setActiveEdit(null)}>Cancel</button>
+          <button type="submit">Add</button>
+        </form>
+      ) : (
+        isActive && (
+          <div className="innerSections">
+            <p>Add Education</p>
+            <button onClick={() => setActiveEdit(0)}>Add</button>
+          </div>
+        )
+      )}
     </section>
   );
 }
@@ -112,7 +148,8 @@ function EducationSection(props) {
   return (
     <>
       {props.isActiveEdit ? (
-        <form action={props.onSubmit}>
+        <form>
+          <h4>Edit Education</h4>
           <div>
             <label htmlFor="institution">Institution</label>
             <input
@@ -172,6 +209,7 @@ function EducationSection(props) {
               onChange={props.changeHandler}
             />
           </div>
+          <button onClick={props.onCancel}>Cancel</button>
           <button type="submit">Save</button>
         </form>
       ) : (
@@ -189,4 +227,4 @@ function EducationSection(props) {
   );
 }
 
-export { PersonalInformation, EducationInformation };
+export { EducationInformation };

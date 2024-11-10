@@ -1,5 +1,5 @@
 import "./App.css";
-import { CvInput } from "./CvInput";
+import { CvInput } from "./components/CvInput";
 
 function App() {
   return (

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { PersonalInformation, EducationInformation } from "./CvInputSections";
+import PersonalInformation from "./PersonalSection";
+import { EducationInformation } from "./EducationSection";
 
 function CvInput() {
   const [activeIndex, setActive] = useState(0);

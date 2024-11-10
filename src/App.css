@@ -15,3 +15,8 @@
 .cvInputHeading div > * {
   margin: 0;
 }
+
+.innerSections {
+  display: flex;
+  justify-content: space-between;
+}
