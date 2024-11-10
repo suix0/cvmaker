@@ -52,6 +52,21 @@ function EducationInformation({ isActive, onShow }) {
     setActiveEdit(null);
   }
 
+  function handleEnterPress(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  }
+
+  function deleteEducationData(e) {
+    e.preventDefault();
+    const newEducationData = initialEducationData.filter(
+      (education) => education.id !== parseInt(e.target.dataset.index),
+    );
+    console.log(newEducationData);
+    setEducationData(newEducationData);
+  }
+
   return (
     <section onClick={onShow}>
       <h1>Education</h1>
@@ -68,6 +83,7 @@ function EducationInformation({ isActive, onShow }) {
             isActiveEdit={activeEdit === education.id}
             onEdit={() => setActiveEdit(education.id)}
             onCancel={() => setActiveEdit(null)}
+            deleteHandler={deleteEducationData}
             changeHandler={inputHandler}
           ></EducationSection>
         ))}
@@ -82,6 +98,7 @@ function EducationInformation({ isActive, onShow }) {
               id="institution"
               value={newData.institution}
               onChange={newDataInputHandler}
+              onKeyDown={handleEnterPress}
             />
           </div>
 
@@ -93,6 +110,7 @@ function EducationInformation({ isActive, onShow }) {
               id="courseTitle"
               value={newData.courseTitle}
               onChange={newDataInputHandler}
+              onKeyDown={handleEnterPress}
             />
           </div>
 
@@ -104,6 +122,7 @@ function EducationInformation({ isActive, onShow }) {
               id="description"
               value={newData.description}
               onChange={newDataInputHandler}
+              onKeyDown={handleEnterPress}
             />
           </div>
 
@@ -115,6 +134,7 @@ function EducationInformation({ isActive, onShow }) {
               id="date"
               value={newData.date}
               onChange={newDataInputHandler}
+              onKeyDown={handleEnterPress}
             />
           </div>
 
@@ -126,11 +146,14 @@ function EducationInformation({ isActive, onShow }) {
               id="grade"
               value={newData.grade}
               onChange={newDataInputHandler}
+              onKeyDown={handleEnterPress}
             />
           </div>
 
           <button onClick={() => setActiveEdit(null)}>Cancel</button>
-          <button type="submit">Add</button>
+          <button type="submit" onClick={newDataSubmitHandler}>
+            Add
+          </button>
         </form>
       ) : (
         isActive && (
@@ -209,8 +232,15 @@ function EducationSection(props) {
               onChange={props.changeHandler}
             />
           </div>
-          <button onClick={props.onCancel}>Cancel</button>
-          <button type="submit">Save</button>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <button data-index={props.index} onClick={props.deleteHandler}>
+              Delete
+            </button>
+            <div>
+              <button onClick={props.onCancel}>Cancel</button>
+              <button type="submit">Save</button>
+            </div>
+          </div>
         </form>
       ) : (
         <div key={props.institution} className="innerSections">
