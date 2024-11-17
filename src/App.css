@@ -20,3 +20,23 @@
   display: flex;
   justify-content: space-between;
 }
+
+.skills {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.skillsDiv {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+}
+
+.skillsDiv div {
+  display: flex;
+  margin: 0px 4px;
+  align-items: center;
+  font-size: 12px;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PersonalInformation from "./PersonalSection";
 import { EducationInformation } from "./EducationSection";
+import { ExperienceInformation } from "./ExperienceSection";
 
 function CvInput() {
   const [activeIndex, setActive] = useState(0);
@@ -31,6 +32,10 @@ function CvInput() {
           isActive={activeIndex === 1}
           onShow={() => setActive(1)}
         ></EducationInformation>
+        <ExperienceInformation
+          isActive={activeIndex === 2}
+          onShow={() => setActive(2)}
+        ></ExperienceInformation>
       </div>
     </div>
   );
