@@ -40,3 +40,8 @@
   align-items: center;
   font-size: 12px;
 }
+
+.buttonsEdit {
+  display: flex;
+  justify-content: space-between;
+}

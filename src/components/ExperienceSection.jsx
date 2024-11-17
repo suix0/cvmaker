@@ -11,9 +11,9 @@ function ExperienceInformation({ isActive, onShow }) {
     description: "",
     date: "",
     location: "",
-    skills: [],
+    skills: "",
+    skillsArr: [],
   });
-  const [skills, setSkills] = useState([]);
 
   function handleFormInputChange(e) {
     const { name, value } = e.target;
@@ -45,6 +45,7 @@ function ExperienceInformation({ isActive, onShow }) {
       date: "",
       location: "",
       skills: "",
+      skillsArr: [],
     });
   }
 
@@ -52,8 +53,13 @@ function ExperienceInformation({ isActive, onShow }) {
   function handleSkillsArray(e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      setSkills([...skills, e.target.value]); // Add the entered skill in skills array
-      setNewData({ ...newData, skills: "" }); // Reset the value for skills input
+      // setSkills([...skills, e.target.value]); // Add the entered skill in skills array
+      setNewData({
+        ...newData,
+        skills: "",
+        skillsArr: [...newData.skillsArr, e.target.value],
+      });
+      console.log(newData);
     }
   }
 
@@ -75,9 +81,29 @@ function ExperienceInformation({ isActive, onShow }) {
     }
   }
 
-  function removeSkill(e) {
+  function removeSkillNewData(e) {
     e.preventDefault();
-    console.log(e);
+    const newSkills = newData.skillsArr.filter(
+      (skill) => skill !== e.target.id,
+    );
+    setNewData({ ...newData, skillsArr: newSkills });
+  }
+
+  function removeSkillExistingData(e) {
+    e.preventDefault();
+    const newExperienceArr = initialExperienceData.map((experience) => {
+      if (experience.id === parseInt(e.target.dataset.index)) {
+        // Retain the skills that do not match the skill we want to remove
+        // in order to successfully remove that skill
+        const newSkillsArr = experience.skillsArr.filter(
+          (skill) => skill !== e.target.id,
+        );
+        return { ...experience, skillsArr: newSkillsArr };
+      } else {
+        return experience;
+      }
+    });
+    setExperienceData(newExperienceArr);
   }
 
   function preventEnterSubmission(e) {
@@ -86,9 +112,13 @@ function ExperienceInformation({ isActive, onShow }) {
     }
   }
 
-  console.log(newData);
-
-  console.log(initialExperienceData);
+  function deleteExperienceSection(e) {
+    e.preventDefault();
+    const newExperienceData = initialExperienceData.filter(
+      (experience) => experience.id !== parseInt(e.target.dataset.index),
+    );
+    setExperienceData(newExperienceData);
+  }
 
   return (
     <section onClick={onShow}>
@@ -109,6 +139,9 @@ function ExperienceInformation({ isActive, onShow }) {
             setActive={() => setActiveEdit(experience.id)}
             handleChange={handleFormInputChange}
             handleAddSkills={handleExistingSkillsArray}
+            handleCancel={() => setActiveEdit(null)}
+            handleDelete={deleteExperienceSection}
+            handleDeleteSkill={removeSkillExistingData}
           ></ExperienceSection>
         ))}
       {isActive && (
@@ -183,9 +216,12 @@ function ExperienceInformation({ isActive, onShow }) {
           <div>
             <label htmlFor="skills">Skills</label>
             <div className="skillsDiv">
-              {skills.map((skill) => (
+              {newData.skillsArr.map((skill) => (
                 <div key={skill}>
-                  <button onClick={removeSkill}>x</button> {skill}
+                  <button onClick={removeSkillNewData} id={skill}>
+                    x
+                  </button>{" "}
+                  {skill}
                 </div>
               ))}
               <input
@@ -280,8 +316,14 @@ function ExperienceSection(props) {
             <label htmlFor="skills">Skills</label>
             <div className="skillsDiv">
               {props.skillsArr.map((skills) => (
-                <div key={skills}>
-                  <button>x</button>
+                <div key={skills} id={skills} data-index={props.index}>
+                  <button
+                    onClick={props.handleDeleteSkill}
+                    id={skills}
+                    data-index={props.index}
+                  >
+                    x
+                  </button>
                   {skills}
                 </div>
               ))}
@@ -296,6 +338,15 @@ function ExperienceSection(props) {
                 placeholder="Type a skill and press ENTER"
                 className="skills"
               />
+            </div>
+          </div>
+          <div className="buttonsEdit">
+            <button onClick={props.handleDelete} data-index={props.index}>
+              Delete
+            </button>
+            <div>
+              <button onClick={props.handleCancel}>Cancel</button>
+              <button>Save</button>
             </div>
           </div>
         </form>

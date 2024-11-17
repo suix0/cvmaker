@@ -63,7 +63,6 @@ function EducationInformation({ isActive, onShow }) {
     const newEducationData = initialEducationData.filter(
       (education) => education.id !== parseInt(e.target.dataset.index),
     );
-    console.log(newEducationData);
     setEducationData(newEducationData);
   }
 
@@ -232,7 +231,7 @@ function EducationSection(props) {
               onChange={props.changeHandler}
             />
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="buttonsEdit">
             <button data-index={props.index} onClick={props.deleteHandler}>
               Delete
             </button>
