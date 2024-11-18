@@ -142,6 +142,7 @@ function ExperienceInformation({ isActive, onShow }) {
             handleCancel={() => setActiveEdit(null)}
             handleDelete={deleteExperienceSection}
             handleDeleteSkill={removeSkillExistingData}
+            handleEnter={preventEnterSubmission}
           ></ExperienceSection>
         ))}
       {isActive && (
@@ -262,6 +263,7 @@ function ExperienceSection(props) {
               data-index={props.index}
               value={props.company}
               onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
             />
           </div>
 
@@ -274,6 +276,7 @@ function ExperienceSection(props) {
               data-index={props.index}
               value={props.jobTitle}
               onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
             />
           </div>
 
@@ -285,6 +288,7 @@ function ExperienceSection(props) {
               data-index={props.index}
               value={props.description}
               onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
             />
           </div>
 
@@ -297,6 +301,7 @@ function ExperienceSection(props) {
               data-index={props.index}
               value={props.date}
               onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
             />
           </div>
 
@@ -309,6 +314,7 @@ function ExperienceSection(props) {
               data-index={props.index}
               value={props.location}
               onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
             />
           </div>
 
