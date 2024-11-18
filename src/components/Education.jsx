@@ -84,6 +84,7 @@ function EducationInformation({ isActive, onShow }) {
             onCancel={() => setActiveEdit(null)}
             deleteHandler={deleteEducationData}
             changeHandler={inputHandler}
+            enterHandler={handleEnterPress}
           ></EducationSection>
         ))}
       {activeEdit === 0 ? (
@@ -181,6 +182,7 @@ function EducationSection(props) {
               id="institution"
               data-index={props.index}
               onChange={props.changeHandler}
+              onKeyDown={props.enterHandler}
             />
           </div>
 
@@ -193,6 +195,7 @@ function EducationSection(props) {
               id="courseTitle"
               data-index={props.index}
               onChange={props.changeHandler}
+              onKeyDown={props.enterHandler}
             />
           </div>
 
@@ -205,6 +208,7 @@ function EducationSection(props) {
               id="description"
               data-index={props.index}
               onChange={props.changeHandler}
+              onKeyDown={props.enterHandler}
             />
           </div>
 
@@ -217,6 +221,7 @@ function EducationSection(props) {
               id="date"
               data-index={props.index}
               onChange={props.changeHandler}
+              onKeyDown={props.enterHandler}
             />
           </div>
 
@@ -229,6 +234,7 @@ function EducationSection(props) {
               id="grade"
               data-index={props.index}
               onChange={props.changeHandler}
+              onKeyDown={props.enterHandler}
             />
           </div>
           <div className="buttonsEdit">
