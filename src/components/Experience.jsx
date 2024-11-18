@@ -179,7 +179,7 @@ function ExperienceInformation({ isActive, onShow }) {
 
           <div>
             <label htmlFor="description">Description</label>
-            <input
+            <textarea
               type="text"
               name="description"
               id="description"
