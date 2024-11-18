@@ -1,7 +1,7 @@
 import { useState } from "react";
-import PersonalInformation from "./PersonalSection";
-import { EducationInformation } from "./EducationSection";
-import { ExperienceInformation } from "./ExperienceSection";
+import PersonalInformation from "./Personal";
+import { EducationInformation } from "./Education";
+import { ExperienceInformation } from "./Experience";
 import { ProjectsInformation } from "./Projects";
 
 function CvInput() {
