@@ -53,13 +53,14 @@ function ExperienceInformation({ isActive, onShow }) {
   function handleSkillsArray(e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      // setSkills([...skills, e.target.value]); // Add the entered skill in skills array
-      setNewData({
-        ...newData,
-        skills: "",
-        skillsArr: [...newData.skillsArr, e.target.value],
-      });
-      console.log(newData);
+      if (e.target.value !== "") {
+        // Ensure that it does not accept empty string
+        setNewData({
+          ...newData,
+          skills: "",
+          skillsArr: [...newData.skillsArr, e.target.value],
+        });
+      }
     }
   }
 
@@ -67,17 +68,22 @@ function ExperienceInformation({ isActive, onShow }) {
   function handleExistingSkillsArray(e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      const index = e.target.dataset.index;
-      const newExperienceData = initialExperienceData.map((experienceData) => {
-        if (experienceData.id === parseInt(index)) {
-          experienceData.skillsArr.push(e.target.value);
-          experienceData.skills = "";
-          return experienceData;
-        } else {
-          return experienceData;
-        }
-      });
-      setExperienceData(newExperienceData);
+      if (e.target.value !== "") {
+        // Ensure that we do not add empty strings
+        const index = e.target.dataset.index;
+        const newExperienceData = initialExperienceData.map(
+          (experienceData) => {
+            if (experienceData.id === parseInt(index)) {
+              experienceData.skillsArr.push(e.target.value);
+              experienceData.skills = "";
+              return experienceData;
+            } else {
+              return experienceData;
+            }
+          },
+        );
+        setExperienceData(newExperienceData);
+      }
     }
   }
 
