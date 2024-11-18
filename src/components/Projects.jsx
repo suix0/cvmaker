@@ -30,6 +30,12 @@ function ProjectsInformation({ isActive, onShow }) {
     setNewProjectsData({ ...newProjectsData, [name]: value });
   }
 
+  function handleEnters(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  }
+
   function addNewProjectsData(e) {
     e.preventDefault();
     setProjectsData([...initialProjectsData, newProjectsData]); // Add the new project data
@@ -56,6 +62,7 @@ function ProjectsInformation({ isActive, onShow }) {
             setActive={() => setActiveEdit(projects.id)}
             editInput={editProjectsData}
             cancelEdit={() => setActiveEdit(null)}
+            preventEnters={handleEnters}
           ></ProjectSection>
         ))}
       {isActive && (
@@ -74,6 +81,7 @@ function ProjectsInformation({ isActive, onShow }) {
               name="projectName"
               value={newProjectsData.projectName}
               onChange={handleInputChangeNewData}
+              onKeyDown={handleEnters}
             />
           </div>
 
@@ -85,6 +93,7 @@ function ProjectsInformation({ isActive, onShow }) {
               name="subHeading"
               value={newProjectsData.subHeading}
               onChange={handleInputChangeNewData}
+              onKeyDown={handleEnters}
             />
           </div>
 
@@ -96,6 +105,7 @@ function ProjectsInformation({ isActive, onShow }) {
               name="description"
               value={newProjectsData.description}
               onChange={handleInputChangeNewData}
+              onKeyDown={handleEnters}
             />
           </div>
 
@@ -107,6 +117,7 @@ function ProjectsInformation({ isActive, onShow }) {
               name="projectLink"
               value={newProjectsData.projectLink}
               onChange={handleInputChangeNewData}
+              onKeyDown={handleEnters}
             />
           </div>
 
@@ -118,6 +129,7 @@ function ProjectsInformation({ isActive, onShow }) {
               name="date"
               value={newProjectsData.date}
               onChange={handleInputChangeNewData}
+              onKeyDown={handleEnters}
             />
           </div>
           <div>
@@ -144,6 +156,7 @@ function ProjectSection(props) {
               value={props.projectObject.projectName}
               data-index={props.index}
               onChange={props.editInput}
+              onKeyDown={props.preventEnters}
             />
           </div>
 
@@ -156,6 +169,7 @@ function ProjectSection(props) {
               value={props.projectObject.subHeading}
               data-index={props.index}
               onChange={props.editInput}
+              onKeyDown={props.preventEnters}
             />
           </div>
 
@@ -168,6 +182,7 @@ function ProjectSection(props) {
               value={props.projectObject.description}
               data-index={props.index}
               onChange={props.editInput}
+              onKeyDown={props.preventEnters}
             />
           </div>
 
@@ -180,6 +195,7 @@ function ProjectSection(props) {
               value={props.projectObject.projectLink}
               data-index={props.index}
               onChange={props.editInput}
+              onKeyDown={props.preventEnters}
             />
           </div>
 
@@ -192,6 +208,7 @@ function ProjectSection(props) {
               value={props.projectObject.date}
               data-index={props.index}
               onChange={props.editInput}
+              onKeyDown={props.preventEnters}
             />
           </div>
           <div className="innerSections">
