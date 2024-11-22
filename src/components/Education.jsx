@@ -1,5 +1,5 @@
 import { useState } from "react";
-import educationData from "../data/EducationData";
+import educationData from "../data/educationData";
 
 function EducationInformation({ isActive, onShow }) {
   const [activeEdit, setActiveEdit] = useState(null);

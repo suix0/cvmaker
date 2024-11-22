@@ -1,5 +1,5 @@
 import { useState } from "react";
-import experienceData from "../data/ExperienceData";
+import experienceData from "../data/experienceData";
 
 function ExperienceInformation({ isActive, onShow }) {
   const [initialExperienceData, setExperienceData] = useState(experienceData);

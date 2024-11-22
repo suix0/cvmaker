@@ -1,5 +1,5 @@
 import { useState } from "react";
-import projects from "../data/ProjectsData";
+import projects from "../data/projectsData";
 
 function ProjectsInformation({ isActive, onShow }) {
   const [initialProjectsData, setProjectsData] = useState(projects);
@@ -49,6 +49,15 @@ function ProjectsInformation({ isActive, onShow }) {
     }); // Reset the new project data for next addition
   }
 
+  function deleteProject(e) {
+    e.preventDefault();
+    const newProjects = initialProjectsData.filter(
+      (project) => project.id !== parseInt(e.target.dataset.index),
+    );
+    console.log(newProjects);
+    setProjectsData(newProjects);
+  }
+
   return (
     <section onClick={onShow}>
       <h1>Projects</h1>
@@ -63,6 +72,7 @@ function ProjectsInformation({ isActive, onShow }) {
             editInput={editProjectsData}
             cancelEdit={() => setActiveEdit(null)}
             preventEnters={handleEnters}
+            handleDelete={deleteProject}
           ></ProjectSection>
         ))}
       {isActive && (
@@ -212,7 +222,9 @@ function ProjectSection(props) {
             />
           </div>
           <div className="innerSections">
-            <button>Delete</button>
+            <button data-index={props.index} onClick={props.handleDelete}>
+              Delete
+            </button>
             <div>
               <button onClick={props.cancelEdit}>Cancel</button>
               <button>Save</button>
