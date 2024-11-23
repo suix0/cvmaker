@@ -1,10 +1,11 @@
 import { useState } from "react";
+import React from "react";
 import PersonalInformation from "./Personal";
 import { EducationInformation } from "./Education";
 import { ExperienceInformation } from "./Experience";
 import { ProjectsInformation } from "./Projects";
 import customSections from "../data/customDataTitle";
-import { CustomSectionForm } from "./customForm/CustomSection";
+import { CustomSectionForm } from "./customForm/CustomSectionForm";
 
 let nextActiveIndex = 4;
 
@@ -103,8 +104,9 @@ function AddCustomSection(props) {
 function CustomSectionInformation(props) {
   const [formActive, setFormActive] = useState(false);
   const [customSectionData, setCustomSectionData] = useState([]);
+  const [editActive, setEditActive] = useState(null);
   const [initialFormData, setFormData] = useState({
-    id: crypto.randomUUID(),
+    id: 0,
     heading: "",
     subHeading: "",
     description: "",
@@ -112,7 +114,7 @@ function CustomSectionInformation(props) {
     additionalInfo: "",
   });
 
-  function editFormData(e) {
+  function inputFormHandler(e) {
     const { name, value } = e.target;
     setFormData({ ...initialFormData, [name]: value });
   }
@@ -121,7 +123,7 @@ function CustomSectionInformation(props) {
     e.preventDefault();
     setCustomSectionData([...customSectionData, initialFormData]);
     setFormData({
-      id: crypto.randomUUID(),
+      id: initialFormData.id + 1,
       heading: "",
       subHeading: "",
       description: "",
@@ -137,21 +139,43 @@ function CustomSectionInformation(props) {
     }
   }
 
+  function cancelForm(e) {
+    e.preventDefault();
+    setFormActive(false);
+  }
+
   return (
     <section onClick={props.onShow}>
       <h1>{props.customSectionTitle}</h1>
       {props.isActive && (
         <>
           {customSectionData.map((customSection) => (
-            <div className="innerSections" key={customSection.id}>
-              <p>
-                <span style={{ fontWeight: "bold" }}>
-                  {customSection.heading} •{" "}
-                </span>
-                {customSection.subHeading}
-              </p>
-              <button>Edit</button>
-            </div>
+            <React.Fragment key={customSection.id}>
+              {editActive === customSection.id ? (
+                <CustomSectionForm
+                  formData={customSection}
+                  key={customSection.id}
+                  inputChangeHandler={inputFormHandler}
+                  submitHandler={addFormData}
+                  enterHandler={preventEnters}
+                  cancelHandler={cancelForm}
+                  cancelEditHandler={() => setEditActive(null)}
+                  isEdit={editActive === customSection.id}
+                ></CustomSectionForm>
+              ) : (
+                <div className="innerSections" key={customSection.id}>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>
+                      {customSection.heading} •{" "}
+                    </span>
+                    {customSection.subHeading}
+                  </p>
+                  <button onClick={() => setEditActive(customSection.id)}>
+                    Edit
+                  </button>
+                </div>
+              )}
+            </React.Fragment>
           ))}
           <div className="innerSections">
             <p>Add Item</p>
@@ -162,9 +186,11 @@ function CustomSectionInformation(props) {
       {props.isActive && formActive && (
         <CustomSectionForm
           formData={initialFormData}
-          inputChangeHandler={editFormData}
+          inputChangeHandler={inputFormHandler}
           submitHandler={addFormData}
           enterHandler={preventEnters}
+          cancelHandler={cancelForm}
+          cancelEditHandler={() => setEditActive(null)}
         ></CustomSectionForm>
       )}
     </section>

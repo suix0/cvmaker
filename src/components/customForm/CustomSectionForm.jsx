@@ -61,8 +61,20 @@ function CustomSectionForm(props) {
           onKeyDown={props.enterHandler}
         />
       </div>
-      <button>Cancel</button>
-      <button onClick={props.submitHandler}>Add</button>
+      {props.isEdit ? (
+        <div className="innerSections">
+          <button>Delete</button>
+          <div>
+            <button onClick={props.cancelEditHandler}>Cancel</button>
+            <button>Save</button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <button onClick={props.cancelHandler}>Cancel</button>
+          <button onClick={props.submitHandler}>Add</button>
+        </>
+      )}
     </form>
   );
 }
