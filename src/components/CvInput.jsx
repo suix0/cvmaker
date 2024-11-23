@@ -132,6 +132,14 @@ function CustomSectionInformation(props) {
     setFormActive(null);
   }
 
+  function deleteCustomSection(e) {
+    e.preventDefault();
+    const newCustomData = customSectionData.filter(
+      (customData) => customData.id !== parseInt(e.target.dataset.index),
+    );
+    setCustomSectionData(newCustomData);
+  }
+
   function preventEnters(e) {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -159,6 +167,8 @@ function CustomSectionInformation(props) {
                   enterHandler={preventEnters}
                   cancelFormHandler={() => setFormActive(null)}
                   isActive={formActive === customSection.id}
+                  index={customSection.id}
+                  deleteHandler={deleteCustomSection}
                 ></CustomSectionForm>
               ) : (
                 <div className="innerSections" key={customSection.id}>

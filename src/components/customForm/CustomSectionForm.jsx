@@ -61,7 +61,9 @@ function CustomSectionForm(props) {
       </div>
       {props.isActive ? (
         <div className="innerSections">
-          <button>Delete</button>
+          <button data-index={props.index} onClick={props.deleteHandler}>
+            Delete
+          </button>
           <div>
             <button onClick={props.cancelFormHandler}>Cancel</button>
             <button>Save</button>
