@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function CustomSectionForm(props) {
   return (
     <form>
@@ -61,17 +59,17 @@ function CustomSectionForm(props) {
           onKeyDown={props.enterHandler}
         />
       </div>
-      {props.isEdit ? (
+      {props.isActive ? (
         <div className="innerSections">
           <button>Delete</button>
           <div>
-            <button onClick={props.cancelEditHandler}>Cancel</button>
+            <button onClick={props.cancelFormHandler}>Cancel</button>
             <button>Save</button>
           </div>
         </div>
       ) : (
         <>
-          <button onClick={props.cancelHandler}>Cancel</button>
+          <button onClick={props.cancelFormHandler}>Cancel</button>
           <button onClick={props.submitHandler}>Add</button>
         </>
       )}

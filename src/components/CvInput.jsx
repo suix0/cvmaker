@@ -102,11 +102,10 @@ function AddCustomSection(props) {
 }
 
 function CustomSectionInformation(props) {
-  const [formActive, setFormActive] = useState(false);
   const [customSectionData, setCustomSectionData] = useState([]);
-  const [editActive, setEditActive] = useState(null);
+  const [formActive, setFormActive] = useState(null);
   const [initialFormData, setFormData] = useState({
-    id: 0,
+    id: 1,
     heading: "",
     subHeading: "",
     description: "",
@@ -130,7 +129,7 @@ function CustomSectionInformation(props) {
       date: "",
       additionalInfo: "",
     });
-    setFormActive(false);
+    setFormActive(null);
   }
 
   function preventEnters(e) {
@@ -151,16 +150,15 @@ function CustomSectionInformation(props) {
         <>
           {customSectionData.map((customSection) => (
             <React.Fragment key={customSection.id}>
-              {editActive === customSection.id ? (
+              {formActive === customSection.id ? (
                 <CustomSectionForm
                   formData={customSection}
                   key={customSection.id}
                   inputChangeHandler={inputFormHandler}
                   submitHandler={addFormData}
                   enterHandler={preventEnters}
-                  cancelHandler={cancelForm}
-                  cancelEditHandler={() => setEditActive(null)}
-                  isEdit={editActive === customSection.id}
+                  cancelFormHandler={() => setFormActive(null)}
+                  isActive={formActive === customSection.id}
                 ></CustomSectionForm>
               ) : (
                 <div className="innerSections" key={customSection.id}>
@@ -170,7 +168,7 @@ function CustomSectionInformation(props) {
                     </span>
                     {customSection.subHeading}
                   </p>
-                  <button onClick={() => setEditActive(customSection.id)}>
+                  <button onClick={() => setFormActive(customSection.id)}>
                     Edit
                   </button>
                 </div>
@@ -179,18 +177,18 @@ function CustomSectionInformation(props) {
           ))}
           <div className="innerSections">
             <p>Add Item</p>
-            <button onClick={() => setFormActive(true)}>Add</button>
+            <button onClick={() => setFormActive(0)}>Add</button>
           </div>
         </>
       )}
-      {props.isActive && formActive && (
+      {props.isActive && formActive === 0 && (
         <CustomSectionForm
           formData={initialFormData}
           inputChangeHandler={inputFormHandler}
           submitHandler={addFormData}
           enterHandler={preventEnters}
           cancelHandler={cancelForm}
-          cancelEditHandler={() => setEditActive(null)}
+          cancelEditHandler={() => setFormActive(null)}
         ></CustomSectionForm>
       )}
     </section>
