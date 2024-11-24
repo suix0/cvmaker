@@ -1,18 +1,22 @@
-import { useState } from "react";
+export function PersonalInformationCvOutput(props) {
+  return (
+    <div>
+      <h1>{props.personalInfo.name}</h1>
+      <ul>
+        <li>{props.personalInfo.number}</li>
+        <li>{props.personalInfo.email}</li>
+        <li>{props.personalInfo.socialMedia}</li>
+      </ul>
+    </div>
+  );
+}
 
-export default function PersonalInformation({ isActive, onShow }) {
-  const [personalInfo, setPersonalInfo] = useState({
-    name: "John Doe",
-    number: "09213210982",
-    email: "johndoe@gmail.com",
-    socialMedia: "https://github.com/johndoe",
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setPersonalInfo({ ...personalInfo, [name]: value });
-  }
-
+export function PersonalInformation({
+  isActive,
+  onShow,
+  personalInfo,
+  handleInputChange,
+}) {
   return (
     <section onClick={onShow}>
       <h1>Personal Information</h1>
@@ -25,7 +29,7 @@ export default function PersonalInformation({ isActive, onShow }) {
               name="name"
               id="name"
               value={personalInfo.name}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
           </div>
           <div>
@@ -35,7 +39,7 @@ export default function PersonalInformation({ isActive, onShow }) {
               name="number"
               id="number"
               value={personalInfo.number}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
           </div>
           <div>
@@ -45,7 +49,7 @@ export default function PersonalInformation({ isActive, onShow }) {
               name="email"
               id="email"
               value={personalInfo.email}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
           </div>
           <div>
@@ -55,7 +59,7 @@ export default function PersonalInformation({ isActive, onShow }) {
               name="socialMedia"
               id="socialMedia"
               value={personalInfo.socialMedia}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
           </div>
         </form>

@@ -1,17 +1,31 @@
 import { useState } from "react";
 import React from "react";
-import PersonalInformation from "./Personal";
+import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
 import { EducationInformation } from "./Education";
 import { ExperienceInformation } from "./Experience";
 import { ProjectsInformation } from "./Projects";
 import { CustomSectionForm } from "./customForm/CustomSectionForm";
 
 let nextActiveIndex = 4;
-
 function CvInput() {
+  // CV Information States
+  const [personalInfo, setPersonalInfo] = useState({
+    name: "John Doe",
+    number: "09213210982",
+    email: "johndoe@gmail.com",
+    socialMedia: "https://github.com/johndoe",
+  });
+  const [customSectionTitle, setTitle] = useState("");
+
+  // Accordion logic in CV form sections
   const [activeIndex, setActive] = useState(0);
   const [customSections, setCustomSections] = useState([]);
-  const [customSectionTitle, setTitle] = useState("");
+
+  // Personal info state change handler
+  function handleIputPersonalInfo(e) {
+    const { name, value } = e.target;
+    setPersonalInfo({ ...personalInfo, [name]: value });
+  }
 
   function handleInputChange(e) {
     setTitle(e.target.value);
@@ -58,6 +72,8 @@ function CvInput() {
         <PersonalInformation
           isActive={activeIndex === 0}
           onShow={() => setActive(0)}
+          personalInfo={personalInfo}
+          handleInputChange={handleIputPersonalInfo}
         ></PersonalInformation>
         <EducationInformation
           isActive={activeIndex === 1}
@@ -85,6 +101,11 @@ function CvInput() {
           customSectionTitle={customSectionTitle}
           handleInputChange={handleInputChange}
         ></AddCustomSection>
+      </div>
+      <div>
+        <PersonalInformationCvOutput
+          personalInfo={personalInfo}
+        ></PersonalInformationCvOutput>
       </div>
     </div>
   );
