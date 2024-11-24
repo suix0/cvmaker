@@ -4,13 +4,13 @@ import PersonalInformation from "./Personal";
 import { EducationInformation } from "./Education";
 import { ExperienceInformation } from "./Experience";
 import { ProjectsInformation } from "./Projects";
-import customSections from "../data/customDataTitle";
 import { CustomSectionForm } from "./customForm/CustomSectionForm";
 
 let nextActiveIndex = 4;
 
 function CvInput() {
   const [activeIndex, setActive] = useState(0);
+  const [customSections, setCustomSections] = useState([]);
   const [customSectionTitle, setTitle] = useState("");
 
   function handleInputChange(e) {
@@ -20,11 +20,21 @@ function CvInput() {
   function handleSubmit(e) {
     e.preventDefault();
     if (customSectionTitle !== "") {
-      customSections.push({ title: customSectionTitle, id: nextActiveIndex });
+      setCustomSections([
+        ...customSections,
+        { title: customSectionTitle, id: nextActiveIndex },
+      ]);
       nextActiveIndex++;
-      console.log(customSections);
       setTitle("");
     }
+  }
+
+  function deleteCustomSection(e) {
+    e.preventDefault();
+    const newCustomData = customSections.filter(
+      (custom) => custom.title !== e.target.dataset.customSectionName,
+    );
+    setCustomSections(newCustomData);
   }
 
   return (
@@ -64,6 +74,7 @@ function CvInput() {
         {customSections.map((custom) => (
           <CustomSectionInformation
             customSectionTitle={custom.title}
+            deleteHandler={deleteCustomSection}
             key={custom.id}
             isActive={activeIndex === custom.id}
             onShow={() => setActive(custom.id)}
@@ -132,7 +143,7 @@ function CustomSectionInformation(props) {
     setFormActive(null);
   }
 
-  function deleteCustomSection(e) {
+  function deleteInnerSections(e) {
     e.preventDefault();
     const newCustomData = customSectionData.filter(
       (customData) => customData.id !== parseInt(e.target.dataset.index),
@@ -153,7 +164,15 @@ function CustomSectionInformation(props) {
 
   return (
     <section onClick={props.onShow}>
-      <h1>{props.customSectionTitle}</h1>
+      <div className="innerSections">
+        <h1>{props.customSectionTitle}</h1>
+        <button
+          data-custom-section-name={props.customSectionTitle}
+          onClick={props.deleteHandler}
+        >
+          Delete
+        </button>
+      </div>
       {props.isActive && (
         <>
           {customSectionData.map((customSection) => (
@@ -168,7 +187,7 @@ function CustomSectionInformation(props) {
                   cancelFormHandler={() => setFormActive(null)}
                   isActive={formActive === customSection.id}
                   index={customSection.id}
-                  deleteHandler={deleteCustomSection}
+                  deleteHandler={deleteInnerSections}
                 ></CustomSectionForm>
               ) : (
                 <div className="innerSections" key={customSection.id}>
