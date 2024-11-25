@@ -1,9 +1,16 @@
 import { useState } from "react";
 import educationData from "../data/educationData";
 
-function EducationInformation({ isActive, onShow }) {
-  const [activeEdit, setActiveEdit] = useState(null);
-  const [initialEducationData, setEducationData] = useState(educationData);
+function EducationInformation({
+  isActive,
+  onShow,
+  initialEducationData,
+  setEducationData,
+  submitHandler,
+  activeEdit,
+  setActiveEdit,
+  setEducationCvDisplay,
+}) {
   const [nextId, setNextId] = useState(3);
   const [newData, setNewData] = useState({
     id: nextId,
@@ -28,7 +35,6 @@ function EducationInformation({ isActive, onShow }) {
         return education;
       }
     });
-
     setEducationData(newEducationData);
   }
 
@@ -40,6 +46,8 @@ function EducationInformation({ isActive, onShow }) {
   function newDataSubmitHandler(e) {
     e.preventDefault();
     setEducationData([...initialEducationData, newData]);
+    setEducationCvDisplay([...initialEducationData, newData]);
+    setEd;
     setNextId(nextId + 1);
     setNewData({
       id: nextId + 1,
@@ -85,6 +93,7 @@ function EducationInformation({ isActive, onShow }) {
             deleteHandler={deleteEducationData}
             changeHandler={inputHandler}
             enterHandler={handleEnterPress}
+            submitHandler={submitHandler}
           ></EducationSection>
         ))}
       {activeEdit === 0 ? (
@@ -243,7 +252,9 @@ function EducationSection(props) {
             </button>
             <div>
               <button onClick={props.onCancel}>Cancel</button>
-              <button type="submit">Save</button>
+              <button type="submit" onClick={props.submitHandler}>
+                Save
+              </button>
             </div>
           </div>
         </form>
@@ -262,4 +273,26 @@ function EducationSection(props) {
   );
 }
 
-export { EducationInformation };
+function EducationCvDisplay(props) {
+  return (
+    <div>
+      <h1>Education</h1>
+      <hr></hr>
+      {props.educationInfo.map((education) => (
+        <div key={education.id}>
+          <div>
+            <h3>{education.institution}</h3>
+            <h3>{education.courseTitle}</h3>
+          </div>
+          <div>
+            <p>{education.date}</p>
+            <h3>{education.grade}</h3>
+          </div>
+          <p>{education.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export { EducationInformation, EducationCvDisplay };

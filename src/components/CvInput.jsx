@@ -1,14 +1,16 @@
 import { useState } from "react";
 import React from "react";
 import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
-import { EducationInformation } from "./Education";
+import { EducationInformation, EducationCvDisplay } from "./Education";
 import { ExperienceInformation } from "./Experience";
 import { ProjectsInformation } from "./Projects";
-import { CustomSectionForm } from "./customForm/CustomSectionForm";
+import { CustomSectionForm } from "./forms/CustomSectionForm";
+import educationData from "../data/educationData";
 
 let nextActiveIndex = 4;
 function CvInput() {
   // CV Information States
+  // Personal Information state
   const [personalInfo, setPersonalInfo] = useState({
     name: "John Doe",
     number: "09213210982",
@@ -16,6 +18,11 @@ function CvInput() {
     socialMedia: "https://github.com/johndoe",
   });
   const [customSectionTitle, setTitle] = useState("");
+
+  // Educaton Information state
+  const [initialEducationData, setEducationData] = useState(educationData);
+  const [educationCvDisplay, setEducationDisplay] = useState(educationData);
+  const [activeEdit, setActiveEdit] = useState(null);
 
   // Accordion logic in CV form sections
   const [activeIndex, setActive] = useState(0);
@@ -27,6 +34,15 @@ function CvInput() {
     setPersonalInfo({ ...personalInfo, [name]: value });
   }
 
+  // Education section
+  // Submit handler
+  function educationInfoSubmit(e) {
+    e.preventDefault();
+    setEducationDisplay(initialEducationData);
+    setActiveEdit(null);
+  }
+
+  // Add Custom Section handler
   function handleInputChange(e) {
     setTitle(e.target.value);
   }
@@ -52,62 +68,75 @@ function CvInput() {
   }
 
   return (
-    <div className="cvInput">
-      <div className="cvInputHeading">
-        <div>
-          <p>
-            cv<span>maker</span>
-          </p>
-          <br></br>
-          <p>
-            by <span>suix0</span>
-          </p>
+    <main className="main">
+      <div className="cvInput">
+        <div className="cvInputHeading">
+          <div>
+            <p>
+              cv<span>maker</span>
+            </p>
+            <br></br>
+            <p>
+              by <span>suix0</span>
+            </p>
+          </div>
+          <button>Download PDF</button>
         </div>
-        <button>Download PDF</button>
-      </div>
 
-      <div className="cvForm">
-        <p>Resume data:</p>
-        <button className="resetBtn">Reset</button>
-        <PersonalInformation
-          isActive={activeIndex === 0}
-          onShow={() => setActive(0)}
-          personalInfo={personalInfo}
-          handleInputChange={handleIputPersonalInfo}
-        ></PersonalInformation>
-        <EducationInformation
-          isActive={activeIndex === 1}
-          onShow={() => setActive(1)}
-        ></EducationInformation>
-        <ExperienceInformation
-          isActive={activeIndex === 2}
-          onShow={() => setActive(2)}
-        ></ExperienceInformation>
-        <ProjectsInformation
-          isActive={activeIndex === 3}
-          onShow={() => setActive(3)}
-        ></ProjectsInformation>
-        {customSections.map((custom) => (
-          <CustomSectionInformation
-            customSectionTitle={custom.title}
-            deleteHandler={deleteCustomSection}
-            key={custom.id}
-            isActive={activeIndex === custom.id}
-            onShow={() => setActive(custom.id)}
-          ></CustomSectionInformation>
-        ))}
-        <AddCustomSection
-          handleSubmit={handleSubmit}
-          customSectionTitle={customSectionTitle}
-          handleInputChange={handleInputChange}
-        ></AddCustomSection>
+        <div className="cvForm">
+          <p>Resume data:</p>
+          <button className="resetBtn">Reset</button>
+          <PersonalInformation
+            isActive={activeIndex === 0}
+            onShow={() => setActive(0)}
+            personalInfo={personalInfo}
+            handleInputChange={handleIputPersonalInfo}
+          ></PersonalInformation>
+          <EducationInformation
+            isActive={activeIndex === 1}
+            onShow={() => setActive(1)}
+            initialEducationData={initialEducationData}
+            setEducationData={setEducationData}
+            setEducationCvDisplay={setEducationDisplay}
+            submitHandler={educationInfoSubmit}
+            activeEdit={activeEdit}
+            setActiveEdit={setActiveEdit}
+          ></EducationInformation>
+          <ExperienceInformation
+            isActive={activeIndex === 2}
+            onShow={() => setActive(2)}
+          ></ExperienceInformation>
+          <ProjectsInformation
+            isActive={activeIndex === 3}
+            onShow={() => setActive(3)}
+          ></ProjectsInformation>
+          {customSections.map((custom) => (
+            <CustomSectionInformation
+              customSectionTitle={custom.title}
+              deleteHandler={deleteCustomSection}
+              key={custom.id}
+              isActive={activeIndex === custom.id}
+              onShow={() => setActive(custom.id)}
+            ></CustomSectionInformation>
+          ))}
+          <AddCustomSection
+            handleSubmit={handleSubmit}
+            customSectionTitle={customSectionTitle}
+            handleInputChange={handleInputChange}
+          ></AddCustomSection>
+        </div>
       </div>
       <div>
-        <PersonalInformationCvOutput
-          personalInfo={personalInfo}
-        ></PersonalInformationCvOutput>
+        <div>
+          <PersonalInformationCvOutput
+            personalInfo={personalInfo}
+          ></PersonalInformationCvOutput>
+          <EducationCvDisplay
+            educationInfo={educationCvDisplay}
+          ></EducationCvDisplay>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 
