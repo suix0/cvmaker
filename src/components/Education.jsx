@@ -47,7 +47,6 @@ function EducationInformation({
     e.preventDefault();
     setEducationData([...initialEducationData, newData]);
     setEducationCvDisplay([...initialEducationData, newData]);
-    setEd;
     setNextId(nextId + 1);
     setNewData({
       id: nextId + 1,

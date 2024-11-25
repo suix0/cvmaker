@@ -22,7 +22,7 @@ function CvInput() {
   // Educaton Information state
   const [initialEducationData, setEducationData] = useState(educationData);
   const [educationCvDisplay, setEducationDisplay] = useState(educationData);
-  const [activeEdit, setActiveEdit] = useState(null);
+  const [activeEditEducation, setActiveEditEducation] = useState(null);
 
   // Accordion logic in CV form sections
   const [activeIndex, setActive] = useState(0);
@@ -39,7 +39,7 @@ function CvInput() {
   function educationInfoSubmit(e) {
     e.preventDefault();
     setEducationDisplay(initialEducationData);
-    setActiveEdit(null);
+    setActiveEditEducation(null);
   }
 
   // Add Custom Section handler
@@ -99,8 +99,8 @@ function CvInput() {
             setEducationData={setEducationData}
             setEducationCvDisplay={setEducationDisplay}
             submitHandler={educationInfoSubmit}
-            activeEdit={activeEdit}
-            setActiveEdit={setActiveEdit}
+            activeEdit={activeEditEducation}
+            setActiveEdit={setActiveEditEducation}
           ></EducationInformation>
           <ExperienceInformation
             isActive={activeIndex === 2}
