@@ -145,13 +145,18 @@ function EducationInformation({
 
           <div>
             <label htmlFor="description">Description</label>
-            <input
+            <textarea
               type="text"
               name="description"
               id="description"
               value={newData.description}
               onChange={newDataInputHandler}
               onKeyDown={handleEnterPress}
+              rows={10}
+              style={{
+                width: "100%",
+                resize: "vertical",
+              }}
             />
           </div>
 
@@ -230,14 +235,18 @@ function EducationSection(props) {
 
           <div>
             <label htmlFor="description">Description</label>
-            <input
+            <textarea
               value={props.description}
-              type="text"
               name="description"
               id="description"
               data-index={props.index}
               onChange={props.changeHandler}
               onKeyDown={props.enterHandler}
+              rows={10}
+              style={{
+                width: "100%",
+                resize: "vertical",
+              }}
             />
           </div>
 

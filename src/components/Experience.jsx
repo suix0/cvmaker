@@ -54,6 +54,7 @@ function ExperienceInformation({
   });
 
   function handleFormInputChange(e) {
+    console.log(e);
     const { name, value } = e.target;
     const index = e.target.dataset.index;
     const newExperienceData = initialExperienceData.map((experience) => {
@@ -182,7 +183,7 @@ function ExperienceInformation({
         });
         setExperienceData(newExperienceData);
       }
-    } else {
+    } else if (e.key === "Enter") {
       e.preventDefault();
     }
   }
@@ -193,6 +194,11 @@ function ExperienceInformation({
       (experience) => experience.id !== parseInt(e.target.dataset.index),
     );
     setExperienceData(newExperienceData);
+  }
+
+  function saveEdit() {
+    setExperienceCvDisplay(initialExperienceData);
+    setActiveEdit(null);
   }
 
   return (
@@ -218,6 +224,7 @@ function ExperienceInformation({
             handleDelete={deleteExperienceSection}
             handleDeleteSkill={removeSkillExistingData}
             handleEnter={preventEnterSubmission}
+            saveHandler={saveEdit}
           ></ExperienceSection>
         ))}
       {isActive && (
@@ -261,7 +268,6 @@ function ExperienceInformation({
               id="description"
               value={newData.description}
               onChange={handleAddFormInputChange}
-              onKeyDown={preventEnterSubmission}
               rows={10}
               style={{
                 whiteSspace: "pre-wrap",
@@ -362,17 +368,15 @@ function ExperienceSection(props) {
           </div>
 
           <div>
-            <label htmlFor="jobTitle">Description</label>
+            <label htmlFor="description">Description</label>
             <textarea
               name="description"
               id="description"
               data-index={props.index}
               value={props.description}
               onChange={props.handleChange}
-              onKeyDown={props.handleEnter}
               rows={10}
               style={{
-                whiteSspace: "pre-wrap",
                 width: "100%",
                 resize: "vertical",
               }}
@@ -443,7 +447,7 @@ function ExperienceSection(props) {
             </button>
             <div>
               <button onClick={props.handleCancel}>Cancel</button>
-              <button>Save</button>
+              <button onClick={props.saveHandler}>Save</button>
             </div>
           </div>
         </form>

@@ -7,6 +7,7 @@ import { ProjectsInformation } from "./Projects";
 import { CustomSectionForm } from "./forms/CustomSectionForm";
 import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
+import projects from "../data/projectsData";
 
 let nextActiveIndex = 4;
 function CvInput() {
@@ -25,10 +26,15 @@ function CvInput() {
   const [educationCvDisplay, setEducationDisplay] = useState(educationData);
   const [activeEditEducation, setActiveEditEducation] = useState(null);
 
-  // Experience Information state\
+  // Experience Information state
   const [initialExperienceData, setExperienceData] = useState(experienceData);
   const [experienceCvDisplay, setExperienceDisplay] = useState(experienceData);
   const [activeEditExperience, setActiveEditExperience] = useState(null);
+
+  // Projects Information state
+  const [initialProjectsData, setProjectsData] = useState(projects);
+  const [projectsCvDisplay, setProjectsDisplay] = useState(projects);
+  const [activeEditProjects, setActiveEditProjects] = useState(null);
 
   // Accordion logic in CV form sections
   const [activeIndex, setActive] = useState(0);
