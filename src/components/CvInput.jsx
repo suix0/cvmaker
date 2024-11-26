@@ -3,7 +3,7 @@ import React from "react";
 import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
 import { EducationInformation, EducationCvDisplay } from "./Education";
 import { ExperienceInformation, ExperienceCvDisplay } from "./Experience";
-import { ProjectsInformation } from "./Projects";
+import { ProjectsInformation, ProjectsCvDisplay } from "./Projects";
 import { CustomSectionForm } from "./forms/CustomSectionForm";
 import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
@@ -126,6 +126,11 @@ function CvInput() {
           <ProjectsInformation
             isActive={activeIndex === 3}
             onShow={() => setActive(3)}
+            initialProjectsData={initialProjectsData}
+            setProjectsData={setProjectsData}
+            setProjectsDisplay={setProjectsDisplay}
+            activeEdit={activeEditProjects}
+            setActiveEdit={setActiveEditProjects}
           ></ProjectsInformation>
           {customSections.map((custom) => (
             <CustomSectionInformation
@@ -154,6 +159,9 @@ function CvInput() {
           <ExperienceCvDisplay
             experience={experienceCvDisplay}
           ></ExperienceCvDisplay>
+          <ProjectsCvDisplay
+            projectsData={projectsCvDisplay}
+          ></ProjectsCvDisplay>
         </div>
       </div>
     </main>

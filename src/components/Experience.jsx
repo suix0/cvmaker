@@ -54,7 +54,6 @@ function ExperienceInformation({
   });
 
   function handleFormInputChange(e) {
-    console.log(e);
     const { name, value } = e.target;
     const index = e.target.dataset.index;
     const newExperienceData = initialExperienceData.map((experience) => {

@@ -1,9 +1,35 @@
 import { useState } from "react";
-import projects from "../data/projectsData";
 
-function ProjectsInformation({ isActive, onShow }) {
-  const [initialProjectsData, setProjectsData] = useState(projects);
-  const [activeEdit, setActiveEdit] = useState(null);
+function ProjectsCvDisplay(props) {
+  return (
+    <div>
+      <h1>Projects</h1>
+      <hr></hr>
+      {props.projectsData.map((project) => (
+        <div key={project.id}>
+          <div>
+            <div>
+              <a href={project.projectLink}>{project.projectName}</a>
+              <p>{project.subHeading}</p>
+            </div>
+            <div>{project.date}</div>
+          </div>
+          <p>{project.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProjectsInformation({
+  isActive,
+  onShow,
+  initialProjectsData,
+  setProjectsData,
+  activeEdit,
+  setActiveEdit,
+  setProjectsDisplay,
+}) {
   const [newProjectsData, setNewProjectsData] = useState({
     id: 3,
     projectName: "",
@@ -31,7 +57,34 @@ function ProjectsInformation({ isActive, onShow }) {
   }
 
   function handleEnters(e) {
-    if (e.key === "Enter") {
+    if (e.target.name === "description") {
+      e.preventDefault();
+      if (e.key === "Enter") {
+        const newProjectsData = initialProjectsData.map((projects) => {
+          if (projects.id === parseInt(e.target.dataset.index)) {
+            return { ...projects, description: (projects.description += "\n") };
+          } else {
+            return projects;
+          }
+        });
+        setProjectsData(newProjectsData);
+      } else if (e.key === "Backspace") {
+        const newProjectsData = initialProjectsData.map((projects) => {
+          if (projects.id === parseInt(e.target.dataset.index)) {
+            return {
+              ...projects,
+              description: projects.description.slice(
+                0,
+                projects.description.length - 1,
+              ),
+            };
+          } else {
+            return projects;
+          }
+        });
+        setProjectsData(newProjectsData);
+      }
+    } else if (e.key === "Enter") {
       e.preventDefault();
     }
   }
@@ -39,6 +92,7 @@ function ProjectsInformation({ isActive, onShow }) {
   function addNewProjectsData(e) {
     e.preventDefault();
     setProjectsData([...initialProjectsData, newProjectsData]); // Add the new project data
+    setProjectsDisplay([...initialProjectsData, newProjectsData]);
     setNewProjectsData({
       id: newProjectsData.id + 1,
       projectName: "",
@@ -58,6 +112,12 @@ function ProjectsInformation({ isActive, onShow }) {
     setProjectsData(newProjects);
   }
 
+  function saveEditToDisplay(e) {
+    e.preventDefault();
+    setProjectsDisplay(initialProjectsData);
+    setActiveEdit(null);
+  }
+
   return (
     <section onClick={onShow}>
       <h1>Projects</h1>
@@ -73,6 +133,7 @@ function ProjectsInformation({ isActive, onShow }) {
             cancelEdit={() => setActiveEdit(null)}
             preventEnters={handleEnters}
             handleDelete={deleteProject}
+            handleSave={saveEditToDisplay}
           ></ProjectSection>
         ))}
       {isActive && (
@@ -115,7 +176,11 @@ function ProjectsInformation({ isActive, onShow }) {
               name="description"
               value={newProjectsData.description}
               onChange={handleInputChangeNewData}
-              onKeyDown={handleEnters}
+              rows={10}
+              style={{
+                width: "100%",
+                resize: "vertical",
+              }}
             />
           </div>
 
@@ -192,7 +257,11 @@ function ProjectSection(props) {
               value={props.projectObject.description}
               data-index={props.index}
               onChange={props.editInput}
-              onKeyDown={props.preventEnters}
+              rows={10}
+              style={{
+                width: "100%",
+                resize: "vertical",
+              }}
             />
           </div>
 
@@ -227,7 +296,7 @@ function ProjectSection(props) {
             </button>
             <div>
               <button onClick={props.cancelEdit}>Cancel</button>
-              <button>Save</button>
+              <button onClick={props.handleSave}>Save</button>
             </div>
           </div>
         </form>
@@ -246,4 +315,4 @@ function ProjectSection(props) {
   );
 }
 
-export { ProjectsInformation };
+export { ProjectsInformation, ProjectsCvDisplay };
