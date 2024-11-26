@@ -1,5 +1,26 @@
 import { useState } from "react";
-import educationData from "../data/educationData";
+
+function EducationCvDisplay(props) {
+  return (
+    <div>
+      <h1>Education</h1>
+      <hr></hr>
+      {props.educationInfo.map((education) => (
+        <div key={education.id}>
+          <div>
+            <p>{education.institution}</p>
+            <p>{education.courseTitle}</p>
+          </div>
+          <div>
+            <p>{education.date}</p>
+            <p>{education.grade}</p>
+          </div>
+          <p>{education.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function EducationInformation({
   isActive,
@@ -269,28 +290,6 @@ function EducationSection(props) {
         </div>
       )}
     </>
-  );
-}
-
-function EducationCvDisplay(props) {
-  return (
-    <div>
-      <h1>Education</h1>
-      <hr></hr>
-      {props.educationInfo.map((education) => (
-        <div key={education.id}>
-          <div>
-            <h3>{education.institution}</h3>
-            <h3>{education.courseTitle}</h3>
-          </div>
-          <div>
-            <p>{education.date}</p>
-            <h3>{education.grade}</h3>
-          </div>
-          <p>{education.description}</p>
-        </div>
-      ))}
-    </div>
   );
 }
 

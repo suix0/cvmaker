@@ -1,9 +1,47 @@
 import { useState } from "react";
-import experienceData from "../data/experienceData";
 
-function ExperienceInformation({ isActive, onShow }) {
-  const [initialExperienceData, setExperienceData] = useState(experienceData);
-  const [activeEdit, setActiveEdit] = useState(null);
+function ExperienceCvDisplay(props) {
+  return (
+    <div>
+      <h1>Professional Experience</h1>
+      <hr></hr>
+      {props.experience.map((experienceData) => (
+        <div key={experienceData.id}>
+          <div>
+            <p>{experienceData.company}</p>
+            <p>{experienceData.jobTitle}</p>
+          </div>
+          <div>
+            <p>
+              {experienceData.date}
+              <span> • {experienceData.location}</span>
+            </p>
+            <div>
+              {experienceData.skillsArr.map((skill) => (
+                <p key={crypto.randomUUID()}>{skill}, </p>
+              ))}
+            </div>
+          </div>
+          <div>
+            {experienceData.description.split("\n").map((desc) => (
+              <p key={crypto.randomUUID()}>{desc}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ExperienceInformation({
+  isActive,
+  onShow,
+  initialExperienceData,
+  setExperienceData,
+  activeEdit,
+  setActiveEdit,
+  setExperienceCvDisplay,
+}) {
   const [newData, setNewData] = useState({
     id: 3,
     company: "",
@@ -37,6 +75,7 @@ function ExperienceInformation({ isActive, onShow }) {
     // Increment id of new data for next render
     e.preventDefault();
     setExperienceData([...initialExperienceData, newData]);
+    setExperienceCvDisplay([...initialExperienceData, newData]);
     setNewData({
       id: newData.id + 1,
       company: "",
@@ -113,7 +152,37 @@ function ExperienceInformation({ isActive, onShow }) {
   }
 
   function preventEnterSubmission(e) {
-    if (e.key === "Enter") {
+    if (e.target.name === "description") {
+      e.preventDefault();
+      if (e.key === "Enter") {
+        const newExperienceData = initialExperienceData.map((experience) => {
+          if (experience.id === parseInt(e.target.dataset.index)) {
+            return {
+              ...experience,
+              description: (experience.description += "\n"),
+            };
+          } else {
+            return experience;
+          }
+        });
+        setExperienceData(newExperienceData);
+      } else if (e.key === "Backspace") {
+        const newExperienceData = initialExperienceData.map((experience) => {
+          if (experience.id === parseInt(e.target.dataset.index)) {
+            return {
+              ...experience,
+              description: experience.description.slice(
+                0,
+                experience.description.length - 1,
+              ),
+            };
+          } else {
+            return experience;
+          }
+        });
+        setExperienceData(newExperienceData);
+      }
+    } else {
       e.preventDefault();
     }
   }
@@ -193,6 +262,12 @@ function ExperienceInformation({ isActive, onShow }) {
               value={newData.description}
               onChange={handleAddFormInputChange}
               onKeyDown={preventEnterSubmission}
+              rows={10}
+              style={{
+                whiteSspace: "pre-wrap",
+                width: "100%",
+                resize: "vertical",
+              }}
             />
           </div>
 
@@ -224,7 +299,7 @@ function ExperienceInformation({ isActive, onShow }) {
             <label htmlFor="skills">Skills</label>
             <div className="skillsDiv">
               {newData.skillsArr.map((skill) => (
-                <div key={skill}>
+                <div key={crypto.randomUUID()}>
                   <button onClick={removeSkillNewData} id={skill}>
                     x
                   </button>{" "}
@@ -289,12 +364,18 @@ function ExperienceSection(props) {
           <div>
             <label htmlFor="jobTitle">Description</label>
             <textarea
-              name="jobTitle"
-              id="jobTitle"
+              name="description"
+              id="description"
               data-index={props.index}
               value={props.description}
               onChange={props.handleChange}
               onKeyDown={props.handleEnter}
+              rows={10}
+              style={{
+                whiteSspace: "pre-wrap",
+                width: "100%",
+                resize: "vertical",
+              }}
             />
           </div>
 
@@ -328,7 +409,11 @@ function ExperienceSection(props) {
             <label htmlFor="skills">Skills</label>
             <div className="skillsDiv">
               {props.skillsArr.map((skills) => (
-                <div key={skills} id={skills} data-index={props.index}>
+                <div
+                  key={crypto.randomUUID()}
+                  id={skills}
+                  data-index={props.index}
+                >
                   <button
                     onClick={props.handleDeleteSkill}
                     id={skills}
@@ -375,4 +460,4 @@ function ExperienceSection(props) {
   );
 }
 
-export { ExperienceInformation };
+export { ExperienceInformation, ExperienceCvDisplay };

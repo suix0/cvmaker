@@ -2,10 +2,11 @@ import { useState } from "react";
 import React from "react";
 import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
 import { EducationInformation, EducationCvDisplay } from "./Education";
-import { ExperienceInformation } from "./Experience";
+import { ExperienceInformation, ExperienceCvDisplay } from "./Experience";
 import { ProjectsInformation } from "./Projects";
 import { CustomSectionForm } from "./forms/CustomSectionForm";
 import educationData from "../data/educationData";
+import experienceData from "../data/experienceData";
 
 let nextActiveIndex = 4;
 function CvInput() {
@@ -23,6 +24,11 @@ function CvInput() {
   const [initialEducationData, setEducationData] = useState(educationData);
   const [educationCvDisplay, setEducationDisplay] = useState(educationData);
   const [activeEditEducation, setActiveEditEducation] = useState(null);
+
+  // Experience Information state\
+  const [initialExperienceData, setExperienceData] = useState(experienceData);
+  const [experienceCvDisplay, setExperienceDisplay] = useState(experienceData);
+  const [activeEditExperience, setActiveEditExperience] = useState(null);
 
   // Accordion logic in CV form sections
   const [activeIndex, setActive] = useState(0);
@@ -105,6 +111,11 @@ function CvInput() {
           <ExperienceInformation
             isActive={activeIndex === 2}
             onShow={() => setActive(2)}
+            initialExperienceData={initialExperienceData}
+            setExperienceData={setExperienceData}
+            setExperienceCvDisplay={setExperienceDisplay}
+            activeEdit={activeEditExperience}
+            setActiveEdit={setActiveEditExperience}
           ></ExperienceInformation>
           <ProjectsInformation
             isActive={activeIndex === 3}
@@ -134,6 +145,9 @@ function CvInput() {
           <EducationCvDisplay
             educationInfo={educationCvDisplay}
           ></EducationCvDisplay>
+          <ExperienceCvDisplay
+            experience={experienceCvDisplay}
+          ></ExperienceCvDisplay>
         </div>
       </div>
     </main>
