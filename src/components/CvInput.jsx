@@ -4,13 +4,16 @@ import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
 import { EducationInformation, EducationCvDisplay } from "./Education";
 import { ExperienceInformation, ExperienceCvDisplay } from "./Experience";
 import { ProjectsInformation, ProjectsCvDisplay } from "./Projects";
-import { CustomSectionForm } from "./forms/CustomSectionForm";
+import { CustomSectionForm } from "./CustomSection";
 import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
 import projects from "../data/projectsData";
 
 let nextActiveIndex = 4;
 function CvInput() {
+  // Accordion logic in CV form sections
+  const [activeIndex, setActive] = useState(0);
+
   // CV Information States
   // Personal Information state
   const [personalInfo, setPersonalInfo] = useState({
@@ -19,7 +22,6 @@ function CvInput() {
     email: "johndoe@gmail.com",
     socialMedia: "https://github.com/johndoe",
   });
-  const [customSectionTitle, setTitle] = useState("");
 
   // Educaton Information state
   const [initialEducationData, setEducationData] = useState(educationData);
@@ -36,9 +38,9 @@ function CvInput() {
   const [projectsCvDisplay, setProjectsDisplay] = useState(projects);
   const [activeEditProjects, setActiveEditProjects] = useState(null);
 
-  // Accordion logic in CV form sections
-  const [activeIndex, setActive] = useState(0);
-  const [customSections, setCustomSections] = useState([]);
+  // Custom Sections
+  const [customSectionTitle, setTitle] = useState("");
+  const [customSection, setCustomSectionData] = useState([]);
 
   // Personal info state change handler
   function handleIputPersonalInfo(e) {
@@ -62,9 +64,13 @@ function CvInput() {
   function handleSubmit(e) {
     e.preventDefault();
     if (customSectionTitle !== "") {
-      setCustomSections([
-        ...customSections,
-        { title: customSectionTitle, id: nextActiveIndex },
+      setCustomSectionData([
+        ...customSection,
+        {
+          id: nextActiveIndex,
+          title: customSectionTitle,
+          customSectionData: [],
+        },
       ]);
       nextActiveIndex++;
       setTitle("");
@@ -73,10 +79,10 @@ function CvInput() {
 
   function deleteCustomSection(e) {
     e.preventDefault();
-    const newCustomData = customSections.filter(
+    const newCustomData = customSection.filter(
       (custom) => custom.title !== e.target.dataset.customSectionName,
     );
-    setCustomSections(newCustomData);
+    setCustomSectionData(newCustomData);
   }
 
   return (
@@ -132,10 +138,13 @@ function CvInput() {
             activeEdit={activeEditProjects}
             setActiveEdit={setActiveEditProjects}
           ></ProjectsInformation>
-          {customSections.map((custom) => (
+          {customSection.map((custom) => (
             <CustomSectionInformation
               customSectionTitle={custom.title}
+              fullCustomData={customSection}
+              customSection={custom}
               deleteHandler={deleteCustomSection}
+              setCustomSectionData={setCustomSectionData}
               key={custom.id}
               isActive={activeIndex === custom.id}
               onShow={() => setActive(custom.id)}
@@ -191,7 +200,6 @@ function AddCustomSection(props) {
 }
 
 function CustomSectionInformation(props) {
-  const [customSectionData, setCustomSectionData] = useState([]);
   const [formActive, setFormActive] = useState(null);
   const [initialFormData, setFormData] = useState({
     id: 1,
@@ -209,7 +217,17 @@ function CustomSectionInformation(props) {
 
   function addFormData(e) {
     e.preventDefault();
-    setCustomSectionData([...customSectionData, initialFormData]);
+    const updatedCustomData = props.fullCustomData.map((customData) => {
+      if (customData.id === parseInt(e.target.dataset.index)) {
+        return {
+          ...customData,
+          customSectionData: [...customData.customSectionData, initialFormData],
+        };
+      } else {
+        return customData;
+      }
+    });
+    props.setCustomSectionData(updatedCustomData);
     setFormData({
       id: initialFormData.id + 1,
       heading: "",
@@ -223,10 +241,21 @@ function CustomSectionInformation(props) {
 
   function deleteInnerSections(e) {
     e.preventDefault();
-    const newCustomData = customSectionData.filter(
+    const newCustomDataArray = props.customSection.customSectionData.filter(
       (customData) => customData.id !== parseInt(e.target.dataset.index),
-    );
-    setCustomSectionData(newCustomData);
+    ); // New custom inner section array (heading, subheading, etc. object inside the array of the custom section)
+    const newCustomSection = {
+      ...props.customSection,
+      customSectionData: newCustomDataArray,
+    }; // Reflect the updated arr to the original custom section object in a new variable
+    const newCustomData = props.fullCustomData.map((data) => {
+      if (data.id === newCustomSection.id) {
+        return newCustomSection;
+      } else {
+        return data;
+      }
+    }); // Update the entire custom data array
+    props.setCustomSectionData(newCustomData);
   }
 
   function preventEnters(e) {
@@ -253,29 +282,29 @@ function CustomSectionInformation(props) {
       </div>
       {props.isActive && (
         <>
-          {customSectionData.map((customSection) => (
-            <React.Fragment key={customSection.id}>
-              {formActive === customSection.id ? (
+          {props.customSection.customSectionData.map((customData) => (
+            <React.Fragment key={customData.id}>
+              {formActive === customData.id ? (
                 <CustomSectionForm
-                  formData={customSection}
-                  key={customSection.id}
+                  formData={customData}
+                  key={customData.id}
                   inputChangeHandler={inputFormHandler}
                   submitHandler={addFormData}
                   enterHandler={preventEnters}
-                  cancelFormHandler={() => setFormActive(null)}
-                  isActive={formActive === customSection.id}
-                  index={customSection.id}
+                  cancelFormHandler={cancelForm}
+                  isActive={formActive === customData.id}
+                  index={customData.id}
                   deleteHandler={deleteInnerSections}
                 ></CustomSectionForm>
               ) : (
-                <div className="innerSections" key={customSection.id}>
+                <div className="innerSections" key={customData.id}>
                   <p>
                     <span style={{ fontWeight: "bold" }}>
-                      {customSection.heading} •{" "}
+                      {customData.heading} •{" "}
                     </span>
-                    {customSection.subHeading}
+                    {customData.subHeading}
                   </p>
-                  <button onClick={() => setFormActive(customSection.id)}>
+                  <button onClick={() => setFormActive(customData.id)}>
                     Edit
                   </button>
                 </div>
@@ -295,6 +324,7 @@ function CustomSectionInformation(props) {
           submitHandler={addFormData}
           enterHandler={preventEnters}
           cancelHandler={cancelForm}
+          index={props.customSection.id}
           cancelEditHandler={() => setFormActive(null)}
         ></CustomSectionForm>
       )}

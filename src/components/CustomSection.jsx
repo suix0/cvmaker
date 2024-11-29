@@ -65,14 +65,16 @@ function CustomSectionForm(props) {
             Delete
           </button>
           <div>
-            <button onClick={props.cancelFormHandler}>Cancel</button>
+            <button onClick={props.cancelHandler}>Cancel</button>
             <button>Save</button>
           </div>
         </div>
       ) : (
         <>
-          <button onClick={props.cancelFormHandler}>Cancel</button>
-          <button onClick={props.submitHandler}>Add</button>
+          <button onClick={props.cancelHandler}>Cancel</button>
+          <button onClick={props.submitHandler} data-index={props.index}>
+            Add
+          </button>
         </>
       )}
     </form>

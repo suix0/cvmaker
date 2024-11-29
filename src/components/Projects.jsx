@@ -9,7 +9,13 @@ function ProjectsCvDisplay(props) {
         <div key={project.id}>
           <div>
             <div>
-              <a href={project.projectLink}>{project.projectName}</a>
+              <a
+                href={project.projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.projectName}
+              </a>
               <p>{project.subHeading}</p>
             </div>
             <div>{project.date}</div>
