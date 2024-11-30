@@ -1,3 +1,29 @@
+function CustomSectionCvDisplay(props) {
+  return (
+    <>
+      {props.customData.map((data) => (
+        <div key={crypto.randomUUID()}>
+          <h1>{data.title}</h1>
+          <hr></hr>
+          {data.customSectionData.map((data) => (
+            <div key={crypto.randomUUID()}>
+              <div>
+                <p>{data.heading}</p>
+                <p>{data.subHeading}</p>
+              </div>
+              <div>
+                <p>{data.date}</p>
+                <p>{data.additionalInfo}</p>
+              </div>
+              <p>{data.description}</p>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}
+
 function CustomSectionForm(props) {
   return (
     <form>
@@ -86,4 +112,4 @@ function CustomSectionForm(props) {
   );
 }
 
-export { CustomSectionForm };
+export { CustomSectionForm, CustomSectionCvDisplay };

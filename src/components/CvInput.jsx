@@ -4,7 +4,7 @@ import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
 import { EducationInformation, EducationCvDisplay } from "./Education";
 import { ExperienceInformation, ExperienceCvDisplay } from "./Experience";
 import { ProjectsInformation, ProjectsCvDisplay } from "./Projects";
-import { CustomSectionForm } from "./CustomSection";
+import { CustomSectionForm, CustomSectionCvDisplay } from "./CustomSection";
 import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
 import projects from "../data/projectsData";
@@ -41,7 +41,7 @@ function CvInput() {
   // Custom Sections
   const [customSectionTitle, setTitle] = useState("");
   const [customSection, setCustomSectionData] = useState([]);
-
+  const [customSectionCvDisplay, setCustomSectionCvDisplay] = useState([]);
   // Personal info state change handler
   function handleIputPersonalInfo(e) {
     const { name, value } = e.target;
@@ -65,6 +65,14 @@ function CvInput() {
     e.preventDefault();
     if (customSectionTitle !== "") {
       setCustomSectionData([
+        ...customSection,
+        {
+          id: nextActiveIndex,
+          title: customSectionTitle,
+          customSectionData: [],
+        },
+      ]);
+      setCustomSectionCvDisplay([
         ...customSection,
         {
           id: nextActiveIndex,
@@ -145,6 +153,7 @@ function CvInput() {
               customSection={custom}
               deleteHandler={deleteCustomSection}
               setCustomSectionData={setCustomSectionData}
+              setCustomDisplay={setCustomSectionCvDisplay}
               key={custom.id}
               isActive={activeIndex === custom.id}
               onShow={() => setActive(custom.id)}
@@ -171,6 +180,9 @@ function CvInput() {
           <ProjectsCvDisplay
             projectsData={projectsCvDisplay}
           ></ProjectsCvDisplay>
+          <CustomSectionCvDisplay
+            customData={customSectionCvDisplay}
+          ></CustomSectionCvDisplay>
         </div>
       </div>
     </main>
@@ -232,6 +244,7 @@ function CustomSectionInformation(props) {
       }
     });
     props.setCustomSectionData(newFullCustomData);
+    props.setCustomDisplay(newFullCustomData);
   }
 
   function addFormData(e) {
@@ -247,6 +260,7 @@ function CustomSectionInformation(props) {
       }
     });
     props.setCustomSectionData(updatedCustomData);
+    props.setCustomDisplay(updatedCustomData);
     setFormData({
       id: initialFormData.id + 1,
       heading: "",
