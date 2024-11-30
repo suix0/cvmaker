@@ -215,6 +215,25 @@ function CustomSectionInformation(props) {
     setFormData({ ...initialFormData, [name]: value });
   }
 
+  function editInputFormHandler(e) {
+    const { name, value } = e.target;
+    const newCustomData = props.customSection.customSectionData.map((data) => {
+      if (data.id === parseInt(e.target.dataset.index)) {
+        return { ...data, [name]: value };
+      } else {
+        return data;
+      }
+    });
+    const newFullCustomData = props.fullCustomData.map((data) => {
+      if (data.id === props.customSection.id) {
+        return { ...data, customSectionData: newCustomData };
+      } else {
+        return data;
+      }
+    });
+    props.setCustomSectionData(newFullCustomData);
+  }
+
   function addFormData(e) {
     e.preventDefault();
     const updatedCustomData = props.fullCustomData.map((customData) => {
@@ -288,7 +307,7 @@ function CustomSectionInformation(props) {
                 <CustomSectionForm
                   formData={customData}
                   key={customData.id}
-                  inputChangeHandler={inputFormHandler}
+                  inputChangeHandler={editInputFormHandler}
                   submitHandler={addFormData}
                   enterHandler={preventEnters}
                   cancelFormHandler={cancelForm}

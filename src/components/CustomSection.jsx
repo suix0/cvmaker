@@ -10,6 +10,7 @@ function CustomSectionForm(props) {
           value={props.formData.heading}
           onChange={props.inputChangeHandler}
           onKeyDown={props.enterHandler}
+          data-index={props.index}
         />
       </div>
 
@@ -22,6 +23,7 @@ function CustomSectionForm(props) {
           value={props.formData.subHeading}
           onChange={props.inputChangeHandler}
           onKeyDown={props.enterHandler}
+          data-index={props.index}
         />
       </div>
 
@@ -33,6 +35,7 @@ function CustomSectionForm(props) {
           value={props.formData.description}
           onChange={props.inputChangeHandler}
           onKeyDown={props.enterHandler}
+          data-index={props.index}
         ></textarea>
       </div>
 
@@ -45,6 +48,7 @@ function CustomSectionForm(props) {
           value={props.formData.date}
           onChange={props.inputChangeHandler}
           onKeyDown={props.enterHandler}
+          data-index={props.index}
         />
       </div>
 
@@ -57,6 +61,7 @@ function CustomSectionForm(props) {
           value={props.formData.additionalInfo}
           onChange={props.inputChangeHandler}
           onKeyDown={props.enterHandler}
+          data-index={props.index}
         />
       </div>
       {props.isActive ? (
