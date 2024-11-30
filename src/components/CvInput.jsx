@@ -85,6 +85,11 @@ function CvInput() {
     }
   }
 
+  function handleSubmitEdit(e) {
+    e.preventDefault();
+    setCustomSectionCvDisplay(customSection);
+  }
+
   function deleteCustomSection(e) {
     e.preventDefault();
     const newCustomData = customSection.filter(
@@ -152,6 +157,7 @@ function CvInput() {
               fullCustomData={customSection}
               customSection={custom}
               deleteHandler={deleteCustomSection}
+              editSubmitHandler={handleSubmitEdit}
               setCustomSectionData={setCustomSectionData}
               setCustomDisplay={setCustomSectionCvDisplay}
               key={custom.id}
@@ -244,7 +250,6 @@ function CustomSectionInformation(props) {
       }
     });
     props.setCustomSectionData(newFullCustomData);
-    props.setCustomDisplay(newFullCustomData);
   }
 
   function addFormData(e) {
@@ -323,6 +328,7 @@ function CustomSectionInformation(props) {
                   key={customData.id}
                   inputChangeHandler={editInputFormHandler}
                   submitHandler={addFormData}
+                  submitSave={props.editSubmitHandler}
                   enterHandler={preventEnters}
                   cancelFormHandler={cancelForm}
                   isActive={formActive === customData.id}
@@ -355,6 +361,7 @@ function CustomSectionInformation(props) {
           formData={initialFormData}
           inputChangeHandler={inputFormHandler}
           submitHandler={addFormData}
+          submitSave={props.editSubmitHandler}
           enterHandler={preventEnters}
           cancelHandler={cancelForm}
           index={props.customSection.id}
