@@ -285,7 +285,7 @@ function CustomSectionInformation(props) {
 
   function cancelForm(e) {
     e.preventDefault();
-    setFormActive(false);
+    setFormActive(null);
   }
 
   return (

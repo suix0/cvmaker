@@ -70,7 +70,7 @@ function CustomSectionForm(props) {
             Delete
           </button>
           <div>
-            <button onClick={props.cancelHandler}>Cancel</button>
+            <button onClick={props.cancelFormHandler}>Cancel</button>
             <button>Save</button>
           </div>
         </div>
