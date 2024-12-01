@@ -18,7 +18,7 @@ export function PersonalInformation({
   handleInputChange,
 }) {
   return (
-    <section onClick={onShow}>
+    <section onClick={onShow} className="outerSection">
       <h1>Personal Information</h1>
       {isActive && (
         <form>

@@ -1,14 +1,29 @@
+:root {
+  --form-bg: #222831;
+  --second-clr: #31363f;
+  --thrd-clr: #76abae;
+  --fourth-clr: #eeeeee;
+}
+
 main {
   display: flex;
   justify-content: space-around;
+  height: 100svh;
+  font-size: 1.5rem;
+}
+
+main > * {
+  flex: 1;
 }
 
 .cvInput {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 3rem;
   gap: 2rem;
-  width: 500px;
+  color: var(--fourth-clr);
+
+  background-color: var(--second-clr);
 }
 
 .cvInputHeading {
@@ -19,6 +34,77 @@ main {
 
 .cvInputHeading div > * {
   margin: 0;
+}
+
+.downloadBtn {
+  height: fit-content;
+  padding: 1rem;
+  background-color: var(--thrd-clr);
+  border: none;
+  border-radius: 360px;
+  cursor: pointer;
+}
+
+.cvForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  color: var(--fourth-clr);
+}
+
+.cvDisplayContainer {
+  padding: 3rem;
+  font-size: 12px;
+}
+
+.cvDisplayContainer > div {
+  padding: 3rem 2rem;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+/* Styling of section */
+.outerSection {
+  background-color: var(--fourth-clr);
+  color: var(--form-bg);
+  padding: 1rem;
+  border-radius: 18px;
+  font-size: smaller;
+}
+
+/* Styling of forms within section */
+.outerSection form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.outerSection h1 {
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+
+/* Form in section */
+.outerSection form div {
+  display: flex;
+  flex: auto;
+  gap: 0.5rem;
+  flex-direction: column;
+  width: 40%;
+}
+
+.outerSection form div input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.outerSection form div label {
+  font-size: smaller;
 }
 
 .innerSections {

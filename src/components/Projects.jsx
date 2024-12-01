@@ -125,7 +125,7 @@ function ProjectsInformation({
   }
 
   return (
-    <section onClick={onShow}>
+    <section onClick={onShow} className="outerSection">
       <h1>Projects</h1>
       {isActive &&
         initialProjectsData.map((projects) => (

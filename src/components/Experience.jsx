@@ -201,7 +201,7 @@ function ExperienceInformation({
   }
 
   return (
-    <section onClick={onShow}>
+    <section onClick={onShow} className="outerSection">
       <h1>Experience</h1>
       {isActive &&
         initialExperienceData.map((experience) => (

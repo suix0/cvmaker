@@ -104,19 +104,24 @@ function CvInput() {
         <div className="cvInputHeading">
           <div>
             <p>
-              cv<span>maker</span>
+              cv
+              <span style={{ color: "#76abae", fontWeight: "bold" }}>
+                maker
+              </span>
             </p>
             <br></br>
             <p>
-              by <span>suix0</span>
+              by{" "}
+              <span style={{ color: "#76abae", fontWeight: "bold" }}>
+                suix0
+              </span>
             </p>
           </div>
-          <button>Download PDF</button>
+          <button className="downloadBtn">Download PDF</button>
         </div>
 
         <div className="cvForm">
           <p>Resume data:</p>
-          <button className="resetBtn">Reset</button>
           <PersonalInformation
             isActive={activeIndex === 0}
             onShow={() => setActive(0)}
@@ -172,7 +177,7 @@ function CvInput() {
           ></AddCustomSection>
         </div>
       </div>
-      <div>
+      <div className="cvDisplayContainer">
         <div>
           <PersonalInformationCvOutput
             personalInfo={personalInfo}
@@ -197,7 +202,7 @@ function CvInput() {
 
 function AddCustomSection(props) {
   return (
-    <section>
+    <section className="outerSection">
       <h1>Add Custom Title</h1>
       <form onSubmit={props.handleSubmit}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -308,7 +313,7 @@ function CustomSectionInformation(props) {
   }
 
   return (
-    <section onClick={props.onShow}>
+    <section onClick={props.onShow} className="outerSection">
       <div className="innerSections">
         <h1>{props.customSectionTitle}</h1>
         <button

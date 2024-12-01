@@ -95,7 +95,7 @@ function EducationInformation({
   }
 
   return (
-    <section onClick={onShow}>
+    <section onClick={onShow} className="outerSection">
       <h1>Education</h1>
       {isActive &&
         initialEducationData.map((education) => (
