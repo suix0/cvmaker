@@ -94,6 +94,7 @@ function EducationInformation({
       (education) => education.id !== parseInt(e.target.dataset.index),
     );
     setEducationData(newEducationData);
+    setEducationCvDisplay(newEducationData);
   }
 
   return (

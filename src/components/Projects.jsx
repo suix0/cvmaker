@@ -116,8 +116,8 @@ function ProjectsInformation({
     const newProjects = initialProjectsData.filter(
       (project) => project.id !== parseInt(e.target.dataset.index),
     );
-    console.log(newProjects);
     setProjectsData(newProjects);
+    setProjectsDisplay(newProjects);
   }
 
   function saveEditToDisplay(e) {
@@ -312,12 +312,12 @@ function ProjectSection(props) {
         </form>
       ) : (
         <div className={props.index === 1 ? "innerSections1" : "innerSections"}>
-          <div>
+          <p>
             <span style={{ fontWeight: "bold" }}>
               {props.projectObject.projectName} •{" "}
             </span>
             {props.projectObject.subHeading}
-          </div>
+          </p>
           <button onClick={props.setActive} className="editBtn">
             <img src={edit} alt="Edit Button image" />
           </button>

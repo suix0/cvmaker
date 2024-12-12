@@ -195,6 +195,7 @@ function ExperienceInformation({
       (experience) => experience.id !== parseInt(e.target.dataset.index),
     );
     setExperienceData(newExperienceData);
+    setExperienceCvDisplay(newExperienceData);
   }
 
   function saveEdit() {

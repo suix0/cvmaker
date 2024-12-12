@@ -39,6 +39,7 @@ img {
   gap: 2rem;
   color: var(--fourth-clr);
 
+  overflow: auto;
   background-color: var(--second-clr);
 }
 
@@ -90,12 +91,31 @@ img {
   font-size: smaller;
 }
 
+.customForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  padding: 1rem;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}
+
 /* Styling of forms within section */
 .outerSection form {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  padding: 1rem;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}
+
+.personalDiv {
+  margin-top: 3rem;
+  border-radius: 10px;
 }
 
 .outerSection h1 {
@@ -130,7 +150,7 @@ img {
   font-size: smaller;
   align-items: center;
   margin-bottom: 0.8rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
   border-radius: 10px;
   background-color: #e2e2e2;
 }
@@ -141,7 +161,7 @@ img {
 }
 
 .innerSections1 {
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .skills {

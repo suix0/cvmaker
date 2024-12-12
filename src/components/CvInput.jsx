@@ -97,6 +97,7 @@ function CvInput() {
       (custom) => custom.title !== e.target.dataset.customSectionName,
     );
     setCustomSectionData(newCustomData);
+    setCustomSectionCvDisplay(newCustomData);
   }
 
   return (
@@ -205,20 +206,43 @@ function AddCustomSection(props) {
   return (
     <section className="outerSection">
       <h1>Add Custom Title</h1>
-      <form onSubmit={props.handleSubmit}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <input
-            type="text"
-            id="custom"
-            name="custom"
-            placeholder="Section Title"
-            style={{ flex: "1", marginRight: "8px" }}
-            value={props.customSectionTitle}
-            onChange={props.handleInputChange}
-          />
-          <button type="submit">Add</button>
-        </div>
-      </form>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "1rem",
+        }}
+      >
+        <input
+          type="text"
+          id="custom"
+          name="custom"
+          placeholder="Section Title"
+          style={{
+            flex: "1",
+            marginRight: "8px",
+            padding: "0.5rem",
+            border: "1px solid #76abae",
+            outlineColor: "#76abae",
+            borderRadius: "8px",
+          }}
+          value={props.customSectionTitle}
+          onChange={props.handleInputChange}
+        />
+        <button
+          style={{
+            borderRadius: "8px",
+            width: "70px",
+            border: "1px solid #76abae",
+            backgroundColor: "#76abae",
+            color: "#eeeeee",
+            fontSize: "1rem",
+          }}
+          onClick={props.handleSubmit}
+        >
+          Add
+        </button>
+      </div>
     </section>
   );
 }
@@ -300,6 +324,7 @@ function CustomSectionInformation(props) {
       }
     }); // Update the entire custom data array
     props.setCustomSectionData(newCustomData);
+    props.setCustomDisplay(newCustomData);
   }
 
   function preventEnters(e) {
