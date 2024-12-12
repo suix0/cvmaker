@@ -1,4 +1,6 @@
 import { useState } from "react";
+import edit from "../assets/pencil-box.svg";
+import add from "../assets/plus-box.svg";
 
 function ExperienceCvDisplay(props) {
   return (
@@ -229,7 +231,9 @@ function ExperienceInformation({
       {isActive && (
         <div className="innerSections">
           <p>Add Experience</p>
-          <button onClick={() => setActiveEdit(0)}>Add</button>
+          <button onClick={() => setActiveEdit(0)} className="addBtn">
+            <img src={add} alt="Pencil logo add button" />
+          </button>
         </div>
       )}
 
@@ -451,12 +455,14 @@ function ExperienceSection(props) {
           </div>
         </form>
       ) : (
-        <div className="innerSections">
+        <div className={props.index === 1 ? "innerSections1" : "innerSections"}>
           <p>
             <span style={{ fontWeight: "bold" }}>{props.company} •</span>{" "}
             {props.jobTitle}
           </p>
-          <button onClick={props.setActive}>Edit</button>
+          <button onClick={props.setActive} className="editBtn">
+            <img src={edit} alt="Edit button image" />
+          </button>
         </div>
       )}
     </>

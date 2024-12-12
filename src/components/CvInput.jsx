@@ -8,6 +8,7 @@ import { CustomSectionForm, CustomSectionCvDisplay } from "./CustomSection";
 import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
 import projects from "../data/projectsData";
+import edit from "../assets/pencil-box.svg";
 
 let nextActiveIndex = 4;
 function CvInput() {
@@ -349,7 +350,7 @@ function CustomSectionInformation(props) {
                     {customData.subHeading}
                   </p>
                   <button onClick={() => setFormActive(customData.id)}>
-                    Edit
+                    <img src={edit} alt="Edit" />
                   </button>
                 </div>
               )}

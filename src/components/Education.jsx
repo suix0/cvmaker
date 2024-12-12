@@ -1,4 +1,6 @@
 import { useState } from "react";
+import edit from "../assets/pencil-box.svg";
+import add from "../assets/plus-box.svg";
 
 function EducationCvDisplay(props) {
   return (
@@ -193,7 +195,9 @@ function EducationInformation({
         isActive && (
           <div className="innerSections">
             <p>Add Education</p>
-            <button onClick={() => setActiveEdit(0)}>Add</button>
+            <button onClick={() => setActiveEdit(0)} className="addBtn">
+              <img src={add} alt="Pencil logo add button" />
+            </button>
           </div>
         )
       )}
@@ -288,13 +292,16 @@ function EducationSection(props) {
           </div>
         </form>
       ) : (
-        <div key={props.institution} className="innerSections">
+        <div
+          key={props.institution}
+          className={props.index === 1 ? "innerSections1" : "innerSections"}
+        >
           <p>
             <span style={{ fontWeight: "bold" }}>{props.institution} • </span>{" "}
             {props.courseTitle}
           </p>
           <button className="editBtn" onClick={props.onEdit}>
-            Edit
+            <img src={edit} alt="Edit button image" />
           </button>
         </div>
       )}
