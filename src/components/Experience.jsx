@@ -151,6 +151,7 @@ function ExperienceInformation({
       }
     });
     setExperienceData(newExperienceArr);
+    setExperienceCvDisplay(newExperienceArr);
   }
 
   function preventEnterSubmission(e) {
@@ -239,29 +240,31 @@ function ExperienceInformation({
       )}
 
       {isActive && activeEdit === 0 && (
-        <form>
-          <div>
-            <label htmlFor="company">Company</label>
-            <input
-              type="text"
-              name="company"
-              id="company"
-              value={newData.company}
-              onChange={handleAddFormInputChange}
-              onKeyDown={preventEnterSubmission}
-            />
-          </div>
+        <form className="forms">
+          <div className="formContainer">
+            <div>
+              <label htmlFor="company">Company</label>
+              <input
+                type="text"
+                name="company"
+                id="company"
+                value={newData.company}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="jobTitle">Job Title</label>
-            <input
-              type="text"
-              name="jobTitle"
-              id="jobTitle"
-              value={newData.jobTitle}
-              onChange={handleAddFormInputChange}
-              onKeyDown={preventEnterSubmission}
-            />
+            <div>
+              <label htmlFor="jobTitle">Job Title</label>
+              <input
+                type="text"
+                name="jobTitle"
+                id="jobTitle"
+                value={newData.jobTitle}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
+              />
+            </div>
           </div>
 
           <div>
@@ -281,28 +284,30 @@ function ExperienceInformation({
             />
           </div>
 
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              type="text"
-              name="date"
-              id="date"
-              value={newData.date}
-              onChange={handleAddFormInputChange}
-              onKeyDown={preventEnterSubmission}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                name="date"
+                id="date"
+                value={newData.date}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="location">Location</label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              value={newData.location}
-              onChange={handleAddFormInputChange}
-              onKeyDown={preventEnterSubmission}
-            />
+            <div>
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                value={newData.location}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
+              />
+            </div>
           </div>
 
           <div>
@@ -344,31 +349,33 @@ function ExperienceSection(props) {
   return (
     <>
       {props.isActive ? (
-        <form>
-          <div>
-            <label htmlFor="company">Company</label>
-            <input
-              type="text"
-              name="company"
-              id="company"
-              data-index={props.index}
-              value={props.company}
-              onChange={props.handleChange}
-              onKeyDown={props.handleEnter}
-            />
-          </div>
+        <form className="forms">
+          <div className="formContainer">
+            <div>
+              <label htmlFor="company">Company</label>
+              <input
+                type="text"
+                name="company"
+                id="company"
+                data-index={props.index}
+                value={props.company}
+                onChange={props.handleChange}
+                onKeyDown={props.handleEnter}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="jobTitle">Job Title</label>
-            <input
-              type="text"
-              name="jobTitle"
-              id="jobTitle"
-              data-index={props.index}
-              value={props.jobTitle}
-              onChange={props.handleChange}
-              onKeyDown={props.handleEnter}
-            />
+            <div>
+              <label htmlFor="jobTitle">Job Title</label>
+              <input
+                type="text"
+                name="jobTitle"
+                id="jobTitle"
+                data-index={props.index}
+                value={props.jobTitle}
+                onChange={props.handleChange}
+                onKeyDown={props.handleEnter}
+              />
+            </div>
           </div>
 
           <div>
@@ -387,30 +394,32 @@ function ExperienceSection(props) {
             />
           </div>
 
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              type="text"
-              name="date"
-              id="date"
-              data-index={props.index}
-              value={props.date}
-              onChange={props.handleChange}
-              onKeyDown={props.handleEnter}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                name="date"
+                id="date"
+                data-index={props.index}
+                value={props.date}
+                onChange={props.handleChange}
+                onKeyDown={props.handleEnter}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="location">Location</label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              data-index={props.index}
-              value={props.location}
-              onChange={props.handleChange}
-              onKeyDown={props.handleEnter}
-            />
+            <div>
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                data-index={props.index}
+                value={props.location}
+                onChange={props.handleChange}
+                onKeyDown={props.handleEnter}
+              />
+            </div>
           </div>
 
           <div>

@@ -103,7 +103,7 @@ img {
 }
 
 /* Styling of forms within section */
-.outerSection form {
+.personalForm {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -111,6 +111,17 @@ img {
   padding: 1rem;
   background-color: #e2e2e2;
   border-radius: 10px;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background-color: #e2e2e2;
+  border-radius: 10px;
+  gap: 1rem;
 }
 
 .personalDiv {
@@ -124,7 +135,7 @@ img {
 }
 
 /* Form in section */
-.outerSection form div {
+.personalForm div {
   display: flex;
   flex: auto;
   gap: 0.5rem;
@@ -132,14 +143,29 @@ img {
   width: 40%;
 }
 
-.outerSection form div input {
+.formContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.forms div > div {
+  display: flex;
+  flex: auto;
+  gap: 0.5rem;
+  flex-direction: column;
+  width: 40%;
+}
+
+.forms div input,
+.personalForm div input {
   padding: 12px;
   border-radius: 10px;
   border: none;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.outerSection form div label {
+.forms div label,
+.personalForm div label {
   font-size: smaller;
 }
 

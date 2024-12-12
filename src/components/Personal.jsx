@@ -22,7 +22,7 @@ export function PersonalInformation({
       <h1>Personal Information</h1>
       {isActive && (
         <div className="personalDiv">
-          <form>
+          <form className="personalForm">
             <div>
               <label htmlFor="name">Name</label>
               <input

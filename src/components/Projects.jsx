@@ -153,29 +153,31 @@ function ProjectsInformation({
         </div>
       )}
       {isActive && activeEdit === 0 && (
-        <form>
-          <div>
-            <label htmlFor="projectName">Project Name</label>
-            <input
-              type="text"
-              id="projectName"
-              name="projectName"
-              value={newProjectsData.projectName}
-              onChange={handleInputChangeNewData}
-              onKeyDown={handleEnters}
-            />
-          </div>
+        <form className="forms">
+          <div className="formContainer">
+            <div>
+              <label htmlFor="projectName">Project Name</label>
+              <input
+                type="text"
+                id="projectName"
+                name="projectName"
+                value={newProjectsData.projectName}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="subHeading">Subheading</label>
-            <input
-              type="text"
-              id="subHeading"
-              name="subHeading"
-              value={newProjectsData.subHeading}
-              onChange={handleInputChangeNewData}
-              onKeyDown={handleEnters}
-            />
+            <div>
+              <label htmlFor="subHeading">Subheading</label>
+              <input
+                type="text"
+                id="subHeading"
+                name="subHeading"
+                value={newProjectsData.subHeading}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
+              />
+            </div>
           </div>
 
           <div>
@@ -193,29 +195,30 @@ function ProjectsInformation({
               }}
             />
           </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="projectLink">Project Link</label>
+              <input
+                type="text"
+                id="projectLink"
+                name="projectLink"
+                value={newProjectsData.projectLink}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="projectLink">Project Link</label>
-            <input
-              type="text"
-              id="projectLink"
-              name="projectLink"
-              value={newProjectsData.projectLink}
-              onChange={handleInputChangeNewData}
-              onKeyDown={handleEnters}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              type="text"
-              id="date"
-              name="date"
-              value={newProjectsData.date}
-              onChange={handleInputChangeNewData}
-              onKeyDown={handleEnters}
-            />
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                id="date"
+                name="date"
+                value={newProjectsData.date}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
+              />
+            </div>
           </div>
           <div>
             <button onClick={() => setActiveEdit(null)}>Cancel</button>
@@ -231,31 +234,33 @@ function ProjectSection(props) {
   return (
     <>
       {props.isActive ? (
-        <form>
-          <div>
-            <label htmlFor="projectName">Project Name</label>
-            <input
-              type="text"
-              id="projectName"
-              name="projectName"
-              value={props.projectObject.projectName}
-              data-index={props.index}
-              onChange={props.editInput}
-              onKeyDown={props.preventEnters}
-            />
-          </div>
+        <form className="forms">
+          <div className="formContainer">
+            <div>
+              <label htmlFor="projectName">Project Name</label>
+              <input
+                type="text"
+                id="projectName"
+                name="projectName"
+                value={props.projectObject.projectName}
+                data-index={props.index}
+                onChange={props.editInput}
+                onKeyDown={props.preventEnters}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="subHeading">Subheading</label>
-            <input
-              type="text"
-              id="subHeading"
-              name="subHeading"
-              value={props.projectObject.subHeading}
-              data-index={props.index}
-              onChange={props.editInput}
-              onKeyDown={props.preventEnters}
-            />
+            <div>
+              <label htmlFor="subHeading">Subheading</label>
+              <input
+                type="text"
+                id="subHeading"
+                name="subHeading"
+                value={props.projectObject.subHeading}
+                data-index={props.index}
+                onChange={props.editInput}
+                onKeyDown={props.preventEnters}
+              />
+            </div>
           </div>
 
           <div>
@@ -275,30 +280,32 @@ function ProjectSection(props) {
             />
           </div>
 
-          <div>
-            <label htmlFor="projectLink">Project Link</label>
-            <input
-              type="text"
-              id="projectLink"
-              name="projectLink"
-              value={props.projectObject.projectLink}
-              data-index={props.index}
-              onChange={props.editInput}
-              onKeyDown={props.preventEnters}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="projectLink">Project Link</label>
+              <input
+                type="text"
+                id="projectLink"
+                name="projectLink"
+                value={props.projectObject.projectLink}
+                data-index={props.index}
+                onChange={props.editInput}
+                onKeyDown={props.preventEnters}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              type="text"
-              id="date"
-              name="date"
-              value={props.projectObject.date}
-              data-index={props.index}
-              onChange={props.editInput}
-              onKeyDown={props.preventEnters}
-            />
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                id="date"
+                name="date"
+                value={props.projectObject.date}
+                data-index={props.index}
+                onChange={props.editInput}
+                onKeyDown={props.preventEnters}
+              />
+            </div>
           </div>
           <div className="innerSections">
             <button data-index={props.index} onClick={props.handleDelete}>

@@ -120,30 +120,32 @@ function EducationInformation({
           ></EducationSection>
         ))}
       {activeEdit === 0 ? (
-        <form onSubmit={newDataSubmitHandler}>
+        <form onSubmit={newDataSubmitHandler} className="forms">
           <p>Add Education</p>
-          <div>
-            <label htmlFor="institution">Institution</label>
-            <input
-              type="text"
-              name="institution"
-              id="institution"
-              value={newData.institution}
-              onChange={newDataInputHandler}
-              onKeyDown={handleEnterPress}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="institution">Institution</label>
+              <input
+                type="text"
+                name="institution"
+                id="institution"
+                value={newData.institution}
+                onChange={newDataInputHandler}
+                onKeyDown={handleEnterPress}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="courseTitle">Course Title</label>
-            <input
-              type="text"
-              name="courseTitle"
-              id="courseTitle"
-              value={newData.courseTitle}
-              onChange={newDataInputHandler}
-              onKeyDown={handleEnterPress}
-            />
+            <div>
+              <label htmlFor="courseTitle">Course Title</label>
+              <input
+                type="text"
+                name="courseTitle"
+                id="courseTitle"
+                value={newData.courseTitle}
+                onChange={newDataInputHandler}
+                onKeyDown={handleEnterPress}
+              />
+            </div>
           </div>
 
           <div>
@@ -163,28 +165,30 @@ function EducationInformation({
             />
           </div>
 
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              type="text"
-              name="date"
-              id="date"
-              value={newData.date}
-              onChange={newDataInputHandler}
-              onKeyDown={handleEnterPress}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                type="text"
+                name="date"
+                id="date"
+                value={newData.date}
+                onChange={newDataInputHandler}
+                onKeyDown={handleEnterPress}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="grade">Grade</label>
-            <input
-              type="text"
-              name="grade"
-              id="grade"
-              value={newData.grade}
-              onChange={newDataInputHandler}
-              onKeyDown={handleEnterPress}
-            />
+            <div>
+              <label htmlFor="grade">Grade</label>
+              <input
+                type="text"
+                name="grade"
+                id="grade"
+                value={newData.grade}
+                onChange={newDataInputHandler}
+                onKeyDown={handleEnterPress}
+              />
+            </div>
           </div>
 
           <button onClick={() => setActiveEdit(null)}>Cancel</button>
@@ -210,32 +214,34 @@ function EducationSection(props) {
   return (
     <>
       {props.isActiveEdit ? (
-        <form>
+        <form className="forms">
           <h4>Edit Education</h4>
-          <div>
-            <label htmlFor="institution">Institution</label>
-            <input
-              value={props.institution}
-              type="text"
-              name="institution"
-              id="institution"
-              data-index={props.index}
-              onChange={props.changeHandler}
-              onKeyDown={props.enterHandler}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="institution">Institution</label>
+              <input
+                value={props.institution}
+                type="text"
+                name="institution"
+                id="institution"
+                data-index={props.index}
+                onChange={props.changeHandler}
+                onKeyDown={props.enterHandler}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="courseTitle">Course Title</label>
-            <input
-              value={props.courseTitle}
-              type="text"
-              name="courseTitle"
-              id="courseTitle"
-              data-index={props.index}
-              onChange={props.changeHandler}
-              onKeyDown={props.enterHandler}
-            />
+            <div>
+              <label htmlFor="courseTitle">Course Title</label>
+              <input
+                value={props.courseTitle}
+                type="text"
+                name="courseTitle"
+                id="courseTitle"
+                data-index={props.index}
+                onChange={props.changeHandler}
+                onKeyDown={props.enterHandler}
+              />
+            </div>
           </div>
 
           <div>
@@ -255,30 +261,32 @@ function EducationSection(props) {
             />
           </div>
 
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              value={props.date}
-              type="text"
-              name="date"
-              id="date"
-              data-index={props.index}
-              onChange={props.changeHandler}
-              onKeyDown={props.enterHandler}
-            />
-          </div>
+          <div className="formContainer">
+            <div>
+              <label htmlFor="date">Date</label>
+              <input
+                value={props.date}
+                type="text"
+                name="date"
+                id="date"
+                data-index={props.index}
+                onChange={props.changeHandler}
+                onKeyDown={props.enterHandler}
+              />
+            </div>
 
-          <div>
-            <label htmlFor="grade">Grade</label>
-            <input
-              value={props.grade}
-              type="text"
-              name="grade"
-              id="grade"
-              data-index={props.index}
-              onChange={props.changeHandler}
-              onKeyDown={props.enterHandler}
-            />
+            <div>
+              <label htmlFor="grade">Grade</label>
+              <input
+                value={props.grade}
+                type="text"
+                name="grade"
+                id="grade"
+                data-index={props.index}
+                onChange={props.changeHandler}
+                onKeyDown={props.enterHandler}
+              />
+            </div>
           </div>
           <div className="buttonsEdit">
             <button data-index={props.index} onClick={props.deleteHandler}>
