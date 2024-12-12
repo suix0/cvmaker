@@ -220,7 +220,7 @@ function ProjectsInformation({
               />
             </div>
           </div>
-          <div>
+          <div className="addBtnContainer">
             <button onClick={() => setActiveEdit(null)}>Cancel</button>
             <button onClick={addNewProjectsData}>Add</button>
           </div>
@@ -311,10 +311,10 @@ function ProjectSection(props) {
             <button data-index={props.index} onClick={props.handleDelete}>
               Delete
             </button>
-            <div>
+            <p>
               <button onClick={props.cancelEdit}>Cancel</button>
               <button onClick={props.handleSave}>Save</button>
-            </div>
+            </p>
           </div>
         </form>
       ) : (

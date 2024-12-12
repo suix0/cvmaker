@@ -190,11 +190,12 @@ function EducationInformation({
               />
             </div>
           </div>
-
-          <button onClick={() => setActiveEdit(null)}>Cancel</button>
-          <button type="submit" onClick={newDataSubmitHandler}>
-            Add
-          </button>
+          <div className="addBtnContainer">
+            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button type="submit" onClick={newDataSubmitHandler}>
+              Add
+            </button>
+          </div>
         </form>
       ) : (
         isActive && (
@@ -292,12 +293,12 @@ function EducationSection(props) {
             <button data-index={props.index} onClick={props.deleteHandler}>
               Delete
             </button>
-            <div>
+            <p>
               <button onClick={props.onCancel}>Cancel</button>
               <button type="submit" onClick={props.submitHandler}>
                 Save
               </button>
-            </div>
+            </p>
           </div>
         </form>
       ) : (

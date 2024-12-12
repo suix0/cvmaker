@@ -95,22 +95,22 @@ function CustomSectionForm(props) {
         </div>
       </div>
       {props.isActive ? (
-        <div className="innerSections">
+        <div className="buttonsEdit">
           <button data-index={props.index} onClick={props.deleteHandler}>
             Delete
           </button>
-          <div>
+          <p>
             <button onClick={props.cancelFormHandler}>Cancel</button>
             <button onClick={props.submitSave}>Save</button>
-          </div>
+          </p>
         </div>
       ) : (
-        <>
+        <div className="addBtnContainer">
           <button onClick={props.cancelHandler}>Cancel</button>
           <button onClick={props.submitHandler} data-index={props.index}>
             Add
           </button>
-        </>
+        </div>
       )}
     </form>
   );

@@ -210,7 +210,58 @@ img {
   font-size: 12px;
 }
 
+.buttonsEdit > button {
+  background-color: red;
+  border: none;
+  color: var(--form-bg);
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 80px;
+}
+
+.buttonsEdit p button:first-child,
+.addBtnContainer button:first-child {
+  background-color: violet;
+  border: none;
+  color: var(--second-clr);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.buttonsEdit p button:nth-child(2),
+.addBtnContainer button:nth-child(2) {
+  background-color: var(--thrd-clr);
+  border: none;
+  color: var(--second-clr);
+  border-radius: 8px;
+  padding: 0.5rem;
+  width: 50px;
+}
+
 .buttonsEdit {
   display: flex;
   justify-content: space-between;
+}
+
+.buttonsEdit button,
+.buttonsEdit p > * {
+  padding: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.buttonsEdit p {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.addBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.addBtnContainer button {
+  padding: 0.3rem;
+  font-size: 0.9rem;
 }

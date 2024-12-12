@@ -333,7 +333,7 @@ function ExperienceInformation({
               />
             </div>
           </div>
-          <div>
+          <div className="addBtnContainer">
             <button onClick={() => setActiveEdit(null)}>Cancel</button>
             <button type="submit" onClick={addNewExperienceData}>
               Add
@@ -458,10 +458,10 @@ function ExperienceSection(props) {
             <button onClick={props.handleDelete} data-index={props.index}>
               Delete
             </button>
-            <div>
+            <p>
               <button onClick={props.handleCancel}>Cancel</button>
               <button onClick={props.saveHandler}>Save</button>
-            </div>
+            </p>
           </div>
         </form>
       ) : (
