@@ -307,7 +307,7 @@ function ProjectSection(props) {
               />
             </div>
           </div>
-          <div className="innerSections">
+          <div className="buttonsEdit">
             <button data-index={props.index} onClick={props.handleDelete}>
               Delete
             </button>

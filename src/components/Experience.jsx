@@ -312,7 +312,7 @@ function ExperienceInformation({
 
           <div>
             <label htmlFor="skills">Skills</label>
-            <div className="skillsDiv">
+            <p className="skillsDiv">
               {newData.skillsArr.map((skill) => (
                 <div key={crypto.randomUUID()}>
                   <button onClick={removeSkillNewData} id={skill}>
@@ -331,7 +331,7 @@ function ExperienceInformation({
                 placeholder="Type a skill and press ENTER"
                 className="skills"
               />
-            </div>
+            </p>
           </div>
           <div className="addBtnContainer">
             <button onClick={() => setActiveEdit(null)}>Cancel</button>
@@ -424,7 +424,7 @@ function ExperienceSection(props) {
 
           <div>
             <label htmlFor="skills">Skills</label>
-            <div className="skillsDiv">
+            <p className="skillsDiv">
               {props.skillsArr.map((skills) => (
                 <div
                   key={crypto.randomUUID()}
@@ -452,7 +452,7 @@ function ExperienceSection(props) {
                 placeholder="Type a skill and press ENTER"
                 className="skills"
               />
-            </div>
+            </p>
           </div>
           <div className="buttonsEdit">
             <button onClick={props.handleDelete} data-index={props.index}>

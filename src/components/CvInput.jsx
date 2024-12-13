@@ -9,6 +9,8 @@ import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
 import projects from "../data/projectsData";
 import edit from "../assets/pencil-box.svg";
+import del from "../assets/delete1.svg";
+import add from "../assets/plus-box.svg";
 
 let nextActiveIndex = 4;
 function CvInput() {
@@ -23,6 +25,7 @@ function CvInput() {
     email: "johndoe@gmail.com",
     socialMedia: "https://github.com/johndoe",
   });
+  const [socialMedia, setSocialMedia] = useState(0); // 0 - linkedin, 1 - github, 2 - X
 
   // Educaton Information state
   const [initialEducationData, setEducationData] = useState(educationData);
@@ -100,6 +103,18 @@ function CvInput() {
     setCustomSectionCvDisplay(newCustomData);
   }
 
+  function handleSocialMediaChange(e) {
+    e.preventDefault();
+    const num = parseInt(e.target.id);
+    if (num === 0) {
+      setSocialMedia(0);
+    } else if (num === 1) {
+      setSocialMedia(1);
+    } else if (num === 2) {
+      setSocialMedia(2);
+    }
+  }
+
   return (
     <main className="main">
       <div className="cvInput">
@@ -129,6 +144,8 @@ function CvInput() {
             onShow={() => setActive(0)}
             personalInfo={personalInfo}
             handleInputChange={handleIputPersonalInfo}
+            socialMediaHandler={handleSocialMediaChange}
+            socialMediaVal={socialMedia}
           ></PersonalInformation>
           <EducationInformation
             isActive={activeIndex === 1}
@@ -183,6 +200,7 @@ function CvInput() {
         <div>
           <PersonalInformationCvOutput
             personalInfo={personalInfo}
+            socialMedia={socialMedia}
           ></PersonalInformationCvOutput>
           <EducationCvDisplay
             educationInfo={educationCvDisplay}
@@ -340,17 +358,23 @@ function CustomSectionInformation(props) {
 
   return (
     <section onClick={props.onShow} className="outerSection">
-      <div className="innerSections">
+      <div className="innerSectionsCustom">
         <h1>{props.customSectionTitle}</h1>
         <button
           data-custom-section-name={props.customSectionTitle}
           onClick={props.deleteHandler}
+          className="customDeleteBtn"
         >
-          Delete
+          <img
+            src={del}
+            alt="trash delete icon"
+            style={{ pointerEvents: "none" }}
+          />
         </button>
       </div>
       {props.isActive && (
         <>
+          <p style={{ marginTop: "3rem" }}></p>
           {props.customSection.customSectionData.map((customData) => (
             <React.Fragment key={customData.id}>
               {formActive === customData.id ? (
@@ -374,7 +398,10 @@ function CustomSectionInformation(props) {
                     </span>
                     {customData.subHeading}
                   </p>
-                  <button onClick={() => setFormActive(customData.id)}>
+                  <button
+                    onClick={() => setFormActive(customData.id)}
+                    className="editBtn"
+                  >
                     <img src={edit} alt="Edit" />
                   </button>
                 </div>
@@ -383,7 +410,9 @@ function CustomSectionInformation(props) {
           ))}
           <div className="innerSections">
             <p>Add Item</p>
-            <button onClick={() => setFormActive(0)}>Add</button>
+            <button onClick={() => setFormActive(0)} className="addBtn">
+              <img src={add} alt="Pencil logo add button" />
+            </button>
           </div>
         </>
       )}

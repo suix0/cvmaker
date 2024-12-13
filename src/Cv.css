@@ -1,0 +1,37 @@
+.cvDisplayContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.cvDisplayContainer > div {
+  width: 650px;
+  height: auto;
+  flex-shrink: none;
+  padding: 2rem 2rem;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.personal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.personal ul {
+  display: flex;
+  gap: 10px;
+}
+
+.personal ul li {
+  list-style: none;
+  text-decoration: underline;
+  color: rgb(76 5 25);
+  font-size: 12px;
+}

@@ -64,6 +64,7 @@ function CustomSectionForm(props) {
           onChange={props.inputChangeHandler}
           onKeyDown={props.enterHandler}
           data-index={props.index}
+          style={{ width: "100%" }}
         ></textarea>
       </div>
 
