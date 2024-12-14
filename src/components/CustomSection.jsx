@@ -5,19 +5,30 @@ function CustomSectionCvDisplay(props) {
         <div key={crypto.randomUUID()}>
           <h1>{data.title}</h1>
           <hr></hr>
-          {data.customSectionData.map((data) => (
-            <div key={crypto.randomUUID()}>
-              <div>
-                <p>{data.heading}</p>
-                <p>{data.subHeading}</p>
+          <div className="cvCustomDisplayContainer">
+            {data.customSectionData.map((data) => (
+              <div key={crypto.randomUUID()} className="cvCustomDisplay">
+                <div className="top">
+                  <div className="left">
+                    <p style={{ fontWeight: "bolder" }}>{data.heading}</p>
+                    <p style={{ color: "rgb(76 5 25)" }}>{data.subHeading}</p>
+                  </div>
+                  <div className="right">
+                    <p style={{ color: "rgb(76 5 25)" }}>{data.date}</p>
+                    <p
+                      style={{
+                        color: "rgb(76 5 25)",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      {data.additionalInfo}
+                    </p>
+                  </div>
+                </div>
+                <p>{data.description}</p>
               </div>
-              <div>
-                <p>{data.date}</p>
-                <p>{data.additionalInfo}</p>
-              </div>
-              <p>{data.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))}
     </>

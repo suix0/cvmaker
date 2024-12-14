@@ -7,19 +7,31 @@ function EducationCvDisplay(props) {
     <div>
       <h1>Education</h1>
       <hr></hr>
-      {props.educationInfo.map((education) => (
-        <div key={education.id}>
-          <div>
-            <p>{education.institution}</p>
-            <p>{education.courseTitle}</p>
+      <div className="cvSectionDisplayContainer">
+        {props.educationInfo.map((education) => (
+          <div key={education.id} className="cvSectionDisplay">
+            <div className="top">
+              <div className="left">
+                <p style={{ fontWeight: "bolder" }}>{education.institution}</p>
+                <p style={{ color: "rgb(76 5 25)" }}>{education.courseTitle}</p>
+              </div>
+              <div className="right">
+                <p style={{ color: "rgb(76 5 25)" }}>{education.date}</p>
+                <p
+                  style={{
+                    color: "rgb(76 5 25)",
+                    fontWeight: "bold",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {education.grade}
+                </p>
+              </div>
+            </div>
+            <p>{education.description}</p>
           </div>
-          <div>
-            <p>{education.date}</p>
-            <p>{education.grade}</p>
-          </div>
-          <p>{education.description}</p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -101,23 +113,29 @@ function EducationInformation({
     <section onClick={onShow} className="outerSection">
       <h1>Education</h1>
       {isActive &&
-        initialEducationData.map((education) => (
-          <EducationSection
-            institution={education.institution}
-            courseTitle={education.courseTitle}
-            description={education.description}
-            date={education.date}
-            grade={education.grade}
-            key={education.id}
-            index={education.id}
-            isActiveEdit={activeEdit === education.id}
-            onEdit={() => setActiveEdit(education.id)}
-            onCancel={() => setActiveEdit(null)}
-            deleteHandler={deleteEducationData}
-            changeHandler={inputHandler}
-            enterHandler={handleEnterPress}
-            submitHandler={submitHandler}
-          ></EducationSection>
+        initialEducationData.map((education, index) => (
+          <>
+            {index === 0 ? (
+              <p style={{ marginBottom: "3rem" }}></p>
+            ) : (
+              <EducationSection
+                institution={education.institution}
+                courseTitle={education.courseTitle}
+                description={education.description}
+                date={education.date}
+                grade={education.grade}
+                key={education.id}
+                index={education.id}
+                isActiveEdit={activeEdit === education.id}
+                onEdit={() => setActiveEdit(education.id)}
+                onCancel={() => setActiveEdit(null)}
+                deleteHandler={deleteEducationData}
+                changeHandler={inputHandler}
+                enterHandler={handleEnterPress}
+                submitHandler={submitHandler}
+              ></EducationSection>
+            )}
+          </>
         ))}
       {activeEdit === 0 ? (
         <form onSubmit={newDataSubmitHandler} className="forms">

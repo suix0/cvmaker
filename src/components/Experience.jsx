@@ -7,30 +7,52 @@ function ExperienceCvDisplay(props) {
     <div>
       <h1>Professional Experience</h1>
       <hr></hr>
-      {props.experience.map((experienceData) => (
-        <div key={experienceData.id}>
-          <div>
-            <p>{experienceData.company}</p>
-            <p>{experienceData.jobTitle}</p>
-          </div>
-          <div>
-            <p>
-              {experienceData.date}
-              <span> • {experienceData.location}</span>
-            </p>
-            <div>
-              {experienceData.skillsArr.map((skill) => (
-                <p key={crypto.randomUUID()}>{skill}, </p>
+      <div className="cvSectionDisplayContainer">
+        {props.experience.map((experienceData) => (
+          <div key={experienceData.id} className="cvSectionDisplay">
+            <div className="top">
+              <div className="left">
+                <p style={{ fontWeight: "bold" }}>{experienceData.company}</p>
+                <p style={{ color: "rgb(76 5 25)" }}>
+                  {experienceData.jobTitle}
+                </p>
+              </div>
+              <div className="right">
+                <p style={{ color: "rgb(76 5 25)" }}>
+                  {experienceData.date}
+                  <span style={{ color: "rgb(76 5 25)", fontWeight: "bold" }}>
+                    {" "}
+                    • {experienceData.location}
+                  </span>
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "3px",
+                    fontStyle: "italic",
+                    color: "rgb(76 5 25)",
+                  }}
+                >
+                  {experienceData.skillsArr.map((skill, index) => (
+                    <p key={crypto.randomUUID()}>
+                      {skill}
+                      {index !== experienceData.skillsArr.length - 1 && // Prevents a comma at the last skill
+                        ","}{" "}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+            >
+              {experienceData.description.split("\n").map((desc) => (
+                <p key={crypto.randomUUID()}>{desc}</p>
               ))}
             </div>
           </div>
-          <div>
-            {experienceData.description.split("\n").map((desc) => (
-              <p key={crypto.randomUUID()}>{desc}</p>
-            ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -208,27 +230,33 @@ function ExperienceInformation({
     <section onClick={onShow} className="outerSection">
       <h1>Experience</h1>
       {isActive &&
-        initialExperienceData.map((experience) => (
-          <ExperienceSection
-            company={experience.company}
-            jobTitle={experience.jobTitle}
-            description={experience.description}
-            date={experience.date}
-            location={experience.location}
-            skills={experience.skills}
-            skillsArr={experience.skillsArr}
-            key={experience.id}
-            index={experience.id}
-            isActive={activeEdit === experience.id}
-            setActive={() => setActiveEdit(experience.id)}
-            handleChange={handleFormInputChange}
-            handleAddSkills={handleExistingSkillsArray}
-            handleCancel={() => setActiveEdit(null)}
-            handleDelete={deleteExperienceSection}
-            handleDeleteSkill={removeSkillExistingData}
-            handleEnter={preventEnterSubmission}
-            saveHandler={saveEdit}
-          ></ExperienceSection>
+        initialExperienceData.map((experience, index) => (
+          <>
+            {index === 0 ? (
+              <p style={{ marginBottom: "3rem" }}></p>
+            ) : (
+              <ExperienceSection
+                company={experience.company}
+                jobTitle={experience.jobTitle}
+                description={experience.description}
+                date={experience.date}
+                location={experience.location}
+                skills={experience.skills}
+                skillsArr={experience.skillsArr}
+                key={experience.id}
+                index={experience.id}
+                isActive={activeEdit === experience.id}
+                setActive={() => setActiveEdit(experience.id)}
+                handleChange={handleFormInputChange}
+                handleAddSkills={handleExistingSkillsArray}
+                handleCancel={() => setActiveEdit(null)}
+                handleDelete={deleteExperienceSection}
+                handleDeleteSkill={removeSkillExistingData}
+                handleEnter={preventEnterSubmission}
+                saveHandler={saveEdit}
+              ></ExperienceSection>
+            )}
+          </>
         ))}
       {isActive && (
         <div className="innerSections">
