@@ -113,48 +113,24 @@ function EducationInformation({
     <section onClick={onShow} className="outerSection">
       <h1>Education</h1>
       <div className={`container ${isActive ? "visible" : "invisible"}`}>
-        {initialEducationData.map((education, index) => (
-          <Fragment key={crypto.randomUUID()}>
-            {index === 0 ? (
-              <>
-                <EducationSection
-                  institution={education.institution}
-                  courseTitle={education.courseTitle}
-                  description={education.description}
-                  date={education.date}
-                  grade={education.grade}
-                  key={education.id}
-                  index={education.id}
-                  isActiveEdit={activeEdit === education.id}
-                  onEdit={() => setActiveEdit(education.id)}
-                  onCancel={() => setActiveEdit(null)}
-                  deleteHandler={deleteEducationData}
-                  changeHandler={inputHandler}
-                  enterHandler={handleEnterPress}
-                  submitHandler={submitHandler}
-                  isActive={isActive}
-                ></EducationSection>
-              </>
-            ) : (
-              <EducationSection
-                institution={education.institution}
-                courseTitle={education.courseTitle}
-                description={education.description}
-                date={education.date}
-                grade={education.grade}
-                key={education.id}
-                index={education.id}
-                isActiveEdit={activeEdit === education.id}
-                onEdit={() => setActiveEdit(education.id)}
-                onCancel={() => setActiveEdit(null)}
-                deleteHandler={deleteEducationData}
-                changeHandler={inputHandler}
-                enterHandler={handleEnterPress}
-                submitHandler={submitHandler}
-                isActive={isActive}
-              ></EducationSection>
-            )}
-          </Fragment>
+        {initialEducationData.map((education) => (
+          <EducationSection
+            institution={education.institution}
+            courseTitle={education.courseTitle}
+            description={education.description}
+            date={education.date}
+            grade={education.grade}
+            key={education.id}
+            index={education.id}
+            isActiveEdit={activeEdit === education.id}
+            onEdit={() => setActiveEdit(education.id)}
+            onCancel={() => setActiveEdit(null)}
+            deleteHandler={deleteEducationData}
+            changeHandler={inputHandler}
+            enterHandler={handleEnterPress}
+            submitHandler={submitHandler}
+            isActive={isActive}
+          ></EducationSection>
         ))}
         {activeEdit === 0 ? (
           <form onSubmit={newDataSubmitHandler} className="forms">

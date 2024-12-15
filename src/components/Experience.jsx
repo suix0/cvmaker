@@ -230,56 +230,28 @@ function ExperienceInformation({
     <section onClick={onShow} className="outerSection">
       <h1>Experience</h1>
       <div className={`container ${isActive ? "visible" : "invisible"}`}>
-        {initialExperienceData.map((experience, index) => (
-          <Fragment key={crypto.randomUUID()}>
-            {index === 0 ? (
-              <>
-                <ExperienceSection
-                  company={experience.company}
-                  jobTitle={experience.jobTitle}
-                  description={experience.description}
-                  date={experience.date}
-                  location={experience.location}
-                  skills={experience.skills}
-                  skillsArr={experience.skillsArr}
-                  key={experience.id}
-                  index={experience.id}
-                  isActive={activeEdit === experience.id}
-                  setActive={() => setActiveEdit(experience.id)}
-                  handleChange={handleFormInputChange}
-                  handleAddSkills={handleExistingSkillsArray}
-                  handleCancel={() => setActiveEdit(null)}
-                  handleDelete={deleteExperienceSection}
-                  handleDeleteSkill={removeSkillExistingData}
-                  handleEnter={preventEnterSubmission}
-                  saveHandler={saveEdit}
-                  isActiveDisplay={isActive}
-                ></ExperienceSection>
-              </>
-            ) : (
-              <ExperienceSection
-                company={experience.company}
-                jobTitle={experience.jobTitle}
-                description={experience.description}
-                date={experience.date}
-                location={experience.location}
-                skills={experience.skills}
-                skillsArr={experience.skillsArr}
-                key={experience.id}
-                index={experience.id}
-                isActive={activeEdit === experience.id}
-                setActive={() => setActiveEdit(experience.id)}
-                handleChange={handleFormInputChange}
-                handleAddSkills={handleExistingSkillsArray}
-                handleCancel={() => setActiveEdit(null)}
-                handleDelete={deleteExperienceSection}
-                handleDeleteSkill={removeSkillExistingData}
-                handleEnter={preventEnterSubmission}
-                saveHandler={saveEdit}
-                isActiveDisplay={isActive}
-              ></ExperienceSection>
-            )}
-          </Fragment>
+        {initialExperienceData.map((experience) => (
+          <ExperienceSection
+            company={experience.company}
+            jobTitle={experience.jobTitle}
+            description={experience.description}
+            date={experience.date}
+            location={experience.location}
+            skills={experience.skills}
+            skillsArr={experience.skillsArr}
+            key={experience.id}
+            index={experience.id}
+            isActive={activeEdit === experience.id}
+            setActive={() => setActiveEdit(experience.id)}
+            handleChange={handleFormInputChange}
+            handleAddSkills={handleExistingSkillsArray}
+            handleCancel={() => setActiveEdit(null)}
+            handleDelete={deleteExperienceSection}
+            handleDeleteSkill={removeSkillExistingData}
+            handleEnter={preventEnterSubmission}
+            saveHandler={saveEdit}
+            isActiveDisplay={isActive}
+          ></ExperienceSection>
         ))}
         {
           <div className={`innerSections`}>

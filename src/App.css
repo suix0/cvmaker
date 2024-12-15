@@ -174,7 +174,7 @@ img {
   transition:
     height 0.2s ease,
     margin-top 0.2s ease,
-    opacity 0.1s ease;
+    opacity 0.2s ease;
 }
 
 .personalDiv.visible,
@@ -186,7 +186,7 @@ img {
   transition:
     height 0.2s ease,
     margin-top 0.2s ease,
-    opacity 0.1 ease;
+    opacity 0.1s ease;
 }
 
 .container {
@@ -203,9 +203,8 @@ img {
   cursor: default;
   transition:
     height 0.2s ease,
-    opacity 0.2s ease,
-    margin 0.2s ease,
-    padding 0.2s ease;
+    opacity 0.1s ease,
+    margin 0.2s ease;
 }
 
 .container.visible,
@@ -215,9 +214,8 @@ img {
   visibility: visible;
   transition:
     height 0.2s ease,
-    opacity 0.2s ease,
-    margin 0.2s ease,
-    padding 0.2s ease;
+    opacity 0.1s ease,
+    margin 0.2s ease;
 }
 
 .outerSection h1 {

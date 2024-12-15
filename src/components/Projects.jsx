@@ -155,38 +155,19 @@ function ProjectsInformation({
     <section onClick={onShow} className="outerSection">
       <h1>Projects</h1>
       <div className={`container ${isActive ? "visible" : "invisible"}`}>
-        {initialProjectsData.map((projects, index) => (
-          <Fragment key={crypto.randomUUID()}>
-            {index === 0 ? (
-              <>
-                <ProjectSection
-                  projectObject={projects}
-                  key={projects.id}
-                  index={projects.id}
-                  isActive={activeEdit === projects.id}
-                  setActive={() => setActiveEdit(projects.id)}
-                  editInput={editProjectsData}
-                  cancelEdit={() => setActiveEdit(null)}
-                  preventEnters={handleEnters}
-                  handleDelete={deleteProject}
-                  handleSave={saveEditToDisplay}
-                ></ProjectSection>
-              </>
-            ) : (
-              <ProjectSection
-                projectObject={projects}
-                key={projects.id}
-                index={projects.id}
-                isActive={activeEdit === projects.id}
-                setActive={() => setActiveEdit(projects.id)}
-                editInput={editProjectsData}
-                cancelEdit={() => setActiveEdit(null)}
-                preventEnters={handleEnters}
-                handleDelete={deleteProject}
-                handleSave={saveEditToDisplay}
-              ></ProjectSection>
-            )}
-          </Fragment>
+        {initialProjectsData.map((projects) => (
+          <ProjectSection
+            projectObject={projects}
+            key={projects.id}
+            index={projects.id}
+            isActive={activeEdit === projects.id}
+            setActive={() => setActiveEdit(projects.id)}
+            editInput={editProjectsData}
+            cancelEdit={() => setActiveEdit(null)}
+            preventEnters={handleEnters}
+            handleDelete={deleteProject}
+            handleSave={saveEditToDisplay}
+          ></ProjectSection>
         ))}
         {isActive && (
           <div className="innerSections">
