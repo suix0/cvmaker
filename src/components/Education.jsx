@@ -109,9 +109,25 @@ function EducationInformation({
     setEducationCvDisplay(newEducationData);
   }
 
+  function cancelHandler(e) {
+    e.preventDefault();
+    setActiveEdit(null);
+  }
+
   return (
     <section onClick={onShow} className="outerSection">
-      <h1>Education</h1>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1>Education</h1>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          style={{ width: "24px" }}
+          className={`arrow ${isActive ? "up" : "down"}`}
+        >
+          <title>chevron-up</title>
+          <path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+        </svg>
+      </div>
       <div className={`container ${isActive ? "visible" : "invisible"}`}>
         {initialEducationData.map((education) => (
           <EducationSection
@@ -124,7 +140,7 @@ function EducationInformation({
             index={education.id}
             isActiveEdit={activeEdit === education.id}
             onEdit={() => setActiveEdit(education.id)}
-            onCancel={() => setActiveEdit(null)}
+            onCancel={cancelHandler}
             deleteHandler={deleteEducationData}
             changeHandler={inputHandler}
             enterHandler={handleEnterPress}
@@ -134,7 +150,7 @@ function EducationInformation({
         ))}
         <form
           onSubmit={newDataSubmitHandler}
-          className={`forms ${activeEdit ? "visible" : "invisible"}`}
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
         >
           <p>Add Education</p>
           <div className="formContainer">
@@ -213,7 +229,7 @@ function EducationInformation({
           </div>
         </form>
         <div
-          className={`innerSections ${activeEdit ? "invisible" : "visible"}`}
+          className={`innerSections ${isActive && activeEdit === 0 ? "invisible" : "visible"}`}
         >
           <p>Add Education</p>
           <button onClick={() => setActiveEdit(0)} className="addBtn">

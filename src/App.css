@@ -50,10 +50,11 @@ img {
 .cvInput {
   display: flex;
   flex-direction: column;
-  padding: 2.5rem;
+  padding: 4.5rem;
   gap: 2rem;
   color: var(--fourth-clr);
-  overflow: auto;
+  overflow: scroll;
+  overflow-x: hidden;
   background-color: var(--second-clr);
 }
 
@@ -135,7 +136,7 @@ img {
   padding: 1rem;
   background-color: #e2e2e2;
   border-radius: 10px;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .personalDiv {
@@ -171,12 +172,10 @@ img {
   margin: 0 !important;
   padding: 0 !important;
   opacity: 0;
-  transform: rotateX(90deg) translateY(100px);
+  transform: translateY(100px);
   transition:
-    height 0.2s ease,
-    margin-top 0.2s ease,
     opacity,
-    transform 0.3s ease;
+    transform 0.2s ease;
 }
 
 .personalDiv.visible,
@@ -185,12 +184,10 @@ img {
   margin-top: 3rem;
   opacity: 1;
   background-color: rgb(226, 226, 226);
-  transform: rotateX(0);
+  transform: translateY(0);
   transition:
-    height 0.2s ease,
-    margin-top 0.2s ease,
     opacity 0.1s ease,
-    transform 0.3s ease;
+    transform 0.2s ease;
 }
 
 .container {
@@ -407,7 +404,7 @@ textarea {
   visibility: hidden;
   padding: 0;
   margin: 0;
-  transform: rotateX(90deg);
+  transform: translateY(100px);
   transition:
     visibility,
     opacity 0.2s ease,
@@ -418,10 +415,10 @@ textarea {
 .forms.visible * {
   opacity: 1;
   visibility: visible;
-  transform: rotateX(0);
+  transform: translateY(0);
   transition:
-    visibility 0.2s,
-    opacity 0.4s ease,
+    visibility 0.1s,
+    opacity 0.2s ease,
     transform 0.2s ease;
 }
 
@@ -436,4 +433,16 @@ textarea {
   font-size: 0;
   opacity: 0;
   visibility: hidden;
+}
+
+.arrow.down {
+  transform: rotate(180deg);
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+
+.arrow.up {
+  transform: rotate(0deg);
+  transition: transform 0.4s ease;
+  cursor: pointer;
 }

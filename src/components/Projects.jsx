@@ -153,7 +153,18 @@ function ProjectsInformation({
 
   return (
     <section onClick={onShow} className="outerSection">
-      <h1>Projects</h1>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1>Projects</h1>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          style={{ width: "24px" }}
+          className={`arrow ${isActive ? "up" : "down"}`}
+        >
+          <title>chevron-up</title>
+          <path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+        </svg>
+      </div>
       <div className={`container ${isActive ? "visible" : "invisible"}`}>
         {initialProjectsData.map((projects) => (
           <ProjectSection
@@ -169,98 +180,9 @@ function ProjectsInformation({
             handleSave={saveEditToDisplay}
           ></ProjectSection>
         ))}
-        {isActive && (
-          <div className="innerSections">
-            <p>Add Project</p>
-            <button onClick={() => setActiveEdit(0)} className="addBtn">
-              <img src={add} alt="Pencil logo add button" />
-            </button>
-          </div>
-        )}
-        {isActive && activeEdit === 0 && (
-          <form className="forms">
-            <div className="formContainer">
-              <div>
-                <label htmlFor="projectName">Project Name</label>
-                <input
-                  type="text"
-                  id="projectName"
-                  name="projectName"
-                  value={newProjectsData.projectName}
-                  onChange={handleInputChangeNewData}
-                  onKeyDown={handleEnters}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subHeading">Subheading</label>
-                <input
-                  type="text"
-                  id="subHeading"
-                  name="subHeading"
-                  value={newProjectsData.subHeading}
-                  onChange={handleInputChangeNewData}
-                  onKeyDown={handleEnters}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="description">Description</label>
-              <textarea
-                type="text"
-                id="description"
-                name="description"
-                value={newProjectsData.description}
-                onChange={handleInputChangeNewData}
-                rows={10}
-                style={{
-                  width: "100%",
-                  resize: "vertical",
-                }}
-              />
-            </div>
-            <div className="formContainer">
-              <div>
-                <label htmlFor="projectLink">Project Link</label>
-                <input
-                  type="text"
-                  id="projectLink"
-                  name="projectLink"
-                  value={newProjectsData.projectLink}
-                  onChange={handleInputChangeNewData}
-                  onKeyDown={handleEnters}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="date">Date</label>
-                <input
-                  type="text"
-                  id="date"
-                  name="date"
-                  value={newProjectsData.date}
-                  onChange={handleInputChangeNewData}
-                  onKeyDown={handleEnters}
-                />
-              </div>
-            </div>
-            <div className="addBtnContainer">
-              <button onClick={() => setActiveEdit(null)}>Cancel</button>
-              <button onClick={addNewProjectsData}>Add</button>
-            </div>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function ProjectSection(props) {
-  return (
-    <>
-      {props.isActive ? (
-        <form className="forms">
+        <form
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
+        >
           <div className="formContainer">
             <div>
               <label htmlFor="projectName">Project Name</label>
@@ -268,10 +190,9 @@ function ProjectSection(props) {
                 type="text"
                 id="projectName"
                 name="projectName"
-                value={props.projectObject.projectName}
-                data-index={props.index}
-                onChange={props.editInput}
-                onKeyDown={props.preventEnters}
+                value={newProjectsData.projectName}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
               />
             </div>
 
@@ -281,10 +202,9 @@ function ProjectSection(props) {
                 type="text"
                 id="subHeading"
                 name="subHeading"
-                value={props.projectObject.subHeading}
-                data-index={props.index}
-                onChange={props.editInput}
-                onKeyDown={props.preventEnters}
+                value={newProjectsData.subHeading}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
               />
             </div>
           </div>
@@ -295,9 +215,8 @@ function ProjectSection(props) {
               type="text"
               id="description"
               name="description"
-              value={props.projectObject.description}
-              data-index={props.index}
-              onChange={props.editInput}
+              value={newProjectsData.description}
+              onChange={handleInputChangeNewData}
               rows={10}
               style={{
                 width: "100%",
@@ -305,7 +224,6 @@ function ProjectSection(props) {
               }}
             />
           </div>
-
           <div className="formContainer">
             <div>
               <label htmlFor="projectLink">Project Link</label>
@@ -313,10 +231,9 @@ function ProjectSection(props) {
                 type="text"
                 id="projectLink"
                 name="projectLink"
-                value={props.projectObject.projectLink}
-                data-index={props.index}
-                onChange={props.editInput}
-                onKeyDown={props.preventEnters}
+                value={newProjectsData.projectLink}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
               />
             </div>
 
@@ -326,36 +243,127 @@ function ProjectSection(props) {
                 type="text"
                 id="date"
                 name="date"
-                value={props.projectObject.date}
-                data-index={props.index}
-                onChange={props.editInput}
-                onKeyDown={props.preventEnters}
+                value={newProjectsData.date}
+                onChange={handleInputChangeNewData}
+                onKeyDown={handleEnters}
               />
             </div>
           </div>
-          <div className="buttonsEdit">
-            <button data-index={props.index} onClick={props.handleDelete}>
-              Delete
-            </button>
-            <p>
-              <button onClick={props.cancelEdit}>Cancel</button>
-              <button onClick={props.handleSave}>Save</button>
-            </p>
+          <div className="addBtnContainer">
+            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button onClick={addNewProjectsData}>Add</button>
           </div>
         </form>
-      ) : (
-        <div className={props.index === 1 ? "innerSections1" : "innerSections"}>
-          <p>
-            <span style={{ fontWeight: "bold" }}>
-              {props.projectObject.projectName} •{" "}
-            </span>
-            {props.projectObject.subHeading}
-          </p>
-          <button onClick={props.setActive} className="editBtn">
-            <img src={edit} alt="Edit Button image" />
+        <div
+          className={`innerSections ${isActive && activeEdit === 0 ? "invisible" : "visible"}`}
+        >
+          <p>Add Project</p>
+          <button onClick={() => setActiveEdit(0)} className="addBtn">
+            <img src={add} alt="Pencil logo add button" />
           </button>
         </div>
-      )}
+      </div>
+    </section>
+  );
+}
+
+function ProjectSection(props) {
+  return (
+    <>
+      <form className={`forms ${props.isActive ? "visible" : "invisible"}`}>
+        <div className="formContainer">
+          <div>
+            <label htmlFor="projectName">Project Name</label>
+            <input
+              type="text"
+              id="projectName"
+              name="projectName"
+              value={props.projectObject.projectName}
+              data-index={props.index}
+              onChange={props.editInput}
+              onKeyDown={props.preventEnters}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="subHeading">Subheading</label>
+            <input
+              type="text"
+              id="subHeading"
+              name="subHeading"
+              value={props.projectObject.subHeading}
+              data-index={props.index}
+              onChange={props.editInput}
+              onKeyDown={props.preventEnters}
+            />
+          </div>
+        </div>
+        <div>
+          <label htmlFor="description">Description</label>
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            value={props.projectObject.description}
+            data-index={props.index}
+            onChange={props.editInput}
+            rows={10}
+            style={{
+              width: "100%",
+              resize: "vertical",
+            }}
+          />
+        </div>
+        <div className="formContainer">
+          <div>
+            <label htmlFor="projectLink">Project Link</label>
+            <input
+              type="text"
+              id="projectLink"
+              name="projectLink"
+              value={props.projectObject.projectLink}
+              data-index={props.index}
+              onChange={props.editInput}
+              onKeyDown={props.preventEnters}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="date">Date</label>
+            <input
+              type="text"
+              id="date"
+              name="date"
+              value={props.projectObject.date}
+              data-index={props.index}
+              onChange={props.editInput}
+              onKeyDown={props.preventEnters}
+            />
+          </div>
+        </div>
+        <div className="buttonsEdit">
+          <button data-index={props.index} onClick={props.handleDelete}>
+            Delete
+          </button>
+          <p>
+            <button onClick={props.cancelEdit}>Cancel</button>
+            <button onClick={props.handleSave}>Save</button>
+          </p>
+        </div>
+      </form>
+      <div
+        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive ? "invisible" : "visible"}`}
+      >
+        <p>
+          <span style={{ fontWeight: "bold" }}>
+            {props.projectObject.projectName} •{" "}
+          </span>
+          {props.projectObject.subHeading}
+        </p>
+        <button onClick={props.setActive} className="editBtn">
+          <img src={edit} alt="Edit Button image" />
+        </button>
+      </div>
     </>
   );
 }
