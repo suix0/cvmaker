@@ -359,18 +359,7 @@ function CustomSectionInformation(props) {
   return (
     <section onClick={props.onShow} className="outerSection">
       <div className="innerSectionsCustom">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <h1>{props.customSectionTitle}</h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            style={{ width: "24px" }}
-            className={`arrow ${isActive ? "up" : "down"}`}
-          >
-            <title>chevron-up</title>
-            <path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
-          </svg>
-        </div>
+        <h1>{props.customSectionTitle}</h1>
         <button
           data-custom-section-name={props.customSectionTitle}
           onClick={props.deleteHandler}
