@@ -228,7 +228,18 @@ function ExperienceInformation({
 
   return (
     <section onClick={onShow} className="outerSection">
-      <h1>Experience</h1>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1>Experience</h1>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          style={{ width: "24px" }}
+          className={`arrow ${isActive ? "up" : "down"}`}
+        >
+          <title>chevron-up</title>
+          <path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+        </svg>
+      </div>
       <div className={`container ${isActive ? "visible" : "invisible"}`}>
         {initialExperienceData.map((experience) => (
           <ExperienceSection
@@ -253,127 +264,9 @@ function ExperienceInformation({
             isActiveDisplay={isActive}
           ></ExperienceSection>
         ))}
-        {
-          <div className={`innerSections`}>
-            <p>Add Experience</p>
-            <button onClick={() => setActiveEdit(0)} className="addBtn">
-              <img src={add} alt="Pencil logo add button" />
-            </button>
-          </div>
-        }
-
-        {isActive && activeEdit === 0 && (
-          <form className="forms">
-            <div className="formContainer">
-              <div>
-                <label htmlFor="company">Company</label>
-                <input
-                  type="text"
-                  name="company"
-                  id="company"
-                  value={newData.company}
-                  onChange={handleAddFormInputChange}
-                  onKeyDown={preventEnterSubmission}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="jobTitle">Job Title</label>
-                <input
-                  type="text"
-                  name="jobTitle"
-                  id="jobTitle"
-                  value={newData.jobTitle}
-                  onChange={handleAddFormInputChange}
-                  onKeyDown={preventEnterSubmission}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="description">Description</label>
-              <textarea
-                type="text"
-                name="description"
-                id="description"
-                value={newData.description}
-                onChange={handleAddFormInputChange}
-                rows={10}
-                style={{
-                  whiteSspace: "pre-wrap",
-                  width: "100%",
-                  resize: "vertical",
-                }}
-              />
-            </div>
-
-            <div className="formContainer">
-              <div>
-                <label htmlFor="date">Date</label>
-                <input
-                  type="text"
-                  name="date"
-                  id="date"
-                  value={newData.date}
-                  onChange={handleAddFormInputChange}
-                  onKeyDown={preventEnterSubmission}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="location">Location</label>
-                <input
-                  type="text"
-                  name="location"
-                  id="location"
-                  value={newData.location}
-                  onChange={handleAddFormInputChange}
-                  onKeyDown={preventEnterSubmission}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="skills">Skills</label>
-              <p className="skillsDiv">
-                {newData.skillsArr.map((skill) => (
-                  <div key={crypto.randomUUID()}>
-                    <button onClick={removeSkillNewData} id={skill}>
-                      x
-                    </button>{" "}
-                    {skill}
-                  </div>
-                ))}
-                <input
-                  type="text"
-                  name="skills"
-                  id="skills"
-                  value={newData.skills}
-                  onChange={handleAddFormInputChange}
-                  onKeyDown={handleSkillsArray}
-                  placeholder="Type a skill and press ENTER"
-                  className="skills"
-                />
-              </p>
-            </div>
-            <div className="addBtnContainer">
-              <button onClick={() => setActiveEdit(null)}>Cancel</button>
-              <button type="submit" onClick={addNewExperienceData}>
-                Add
-              </button>
-            </div>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function ExperienceSection(props) {
-  return (
-    <>
-      {props.isActive ? (
-        <form className="forms">
+        <form
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
+        >
           <div className="formContainer">
             <div>
               <label htmlFor="company">Company</label>
@@ -381,10 +274,9 @@ function ExperienceSection(props) {
                 type="text"
                 name="company"
                 id="company"
-                data-index={props.index}
-                value={props.company}
-                onChange={props.handleChange}
-                onKeyDown={props.handleEnter}
+                value={newData.company}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
               />
             </div>
 
@@ -394,10 +286,9 @@ function ExperienceSection(props) {
                 type="text"
                 name="jobTitle"
                 id="jobTitle"
-                data-index={props.index}
-                value={props.jobTitle}
-                onChange={props.handleChange}
-                onKeyDown={props.handleEnter}
+                value={newData.jobTitle}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
               />
             </div>
           </div>
@@ -405,13 +296,14 @@ function ExperienceSection(props) {
           <div>
             <label htmlFor="description">Description</label>
             <textarea
+              type="text"
               name="description"
               id="description"
-              data-index={props.index}
-              value={props.description}
-              onChange={props.handleChange}
+              value={newData.description}
+              onChange={handleAddFormInputChange}
               rows={10}
               style={{
+                whiteSspace: "pre-wrap",
                 width: "100%",
                 resize: "vertical",
               }}
@@ -425,10 +317,9 @@ function ExperienceSection(props) {
                 type="text"
                 name="date"
                 id="date"
-                data-index={props.index}
-                value={props.date}
-                onChange={props.handleChange}
-                onKeyDown={props.handleEnter}
+                value={newData.date}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
               />
             </div>
 
@@ -438,69 +329,186 @@ function ExperienceSection(props) {
                 type="text"
                 name="location"
                 id="location"
-                data-index={props.index}
-                value={props.location}
-                onChange={props.handleChange}
-                onKeyDown={props.handleEnter}
+                value={newData.location}
+                onChange={handleAddFormInputChange}
+                onKeyDown={preventEnterSubmission}
               />
             </div>
           </div>
 
           <div>
             <label htmlFor="skills">Skills</label>
-            <p className="skillsDiv">
-              {props.skillsArr.map((skills) => (
-                <div
-                  key={crypto.randomUUID()}
-                  id={skills}
-                  data-index={props.index}
-                >
-                  <button
-                    onClick={props.handleDeleteSkill}
-                    id={skills}
-                    data-index={props.index}
-                  >
+            <section className="skillsDiv">
+              {newData.skillsArr.map((skill) => (
+                <div key={crypto.randomUUID()}>
+                  <button onClick={removeSkillNewData} id={skill}>
                     x
-                  </button>
-                  {skills}
+                  </button>{" "}
+                  {skill}
                 </div>
               ))}
               <input
                 type="text"
                 name="skills"
                 id="skills"
-                data-index={props.index}
-                value={props.skills}
-                onChange={props.handleChange}
-                onKeyDown={props.handleAddSkills}
+                value={newData.skills}
+                onChange={handleAddFormInputChange}
+                onKeyDown={handleSkillsArray}
                 placeholder="Type a skill and press ENTER"
                 className="skills"
               />
-            </p>
+            </section>
           </div>
-          <div className="buttonsEdit">
-            <button onClick={props.handleDelete} data-index={props.index}>
-              Delete
+          <div className="addBtnContainer">
+            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button type="submit" onClick={addNewExperienceData}>
+              Add
             </button>
-            <p>
-              <button onClick={props.handleCancel}>Cancel</button>
-              <button onClick={props.saveHandler}>Save</button>
-            </p>
           </div>
         </form>
-      ) : (
         <div
-          className={`${props.index === 1 ? "innerSections1" : "innerSections"}`}
+          className={`innerSections ${isActive && activeEdit === 0 ? "invisible" : "visible"}`}
         >
-          <p>
-            <span style={{ fontWeight: "bold" }}>{props.company} •</span>{" "}
-            {props.jobTitle}
-          </p>
-          <button onClick={props.setActive} className="editBtn">
-            <img src={edit} alt="Edit button image" />
+          <p>Add Experience</p>
+          <button onClick={() => setActiveEdit(0)} className="addBtn">
+            <img src={add} alt="Pencil logo add button" />
           </button>
         </div>
-      )}
+      </div>
+    </section>
+  );
+}
+
+function ExperienceSection(props) {
+  return (
+    <>
+      <form className={`forms ${props.isActive ? "visible" : "invisible"}`}>
+        <h4>Edit Experience</h4>
+        <div className="formContainer">
+          <div>
+            <label htmlFor="company">Company</label>
+            <input
+              type="text"
+              name="company"
+              id="company"
+              data-index={props.index}
+              value={props.company}
+              onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="jobTitle">Job Title</label>
+            <input
+              type="text"
+              name="jobTitle"
+              id="jobTitle"
+              data-index={props.index}
+              value={props.jobTitle}
+              onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="description">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            data-index={props.index}
+            value={props.description}
+            onChange={props.handleChange}
+            rows={10}
+            style={{
+              width: "100%",
+              resize: "vertical",
+            }}
+          />
+        </div>
+
+        <div className="formContainer">
+          <div>
+            <label htmlFor="date">Date</label>
+            <input
+              type="text"
+              name="date"
+              id="date"
+              data-index={props.index}
+              value={props.date}
+              onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="location">Location</label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              data-index={props.index}
+              value={props.location}
+              onChange={props.handleChange}
+              onKeyDown={props.handleEnter}
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="skills">Skills</label>
+          <section className="skillsDiv">
+            {props.skillsArr.map((skills) => (
+              <div
+                key={crypto.randomUUID()}
+                id={skills}
+                data-index={props.index}
+              >
+                <button
+                  onClick={props.handleDeleteSkill}
+                  id={skills}
+                  data-index={props.index}
+                >
+                  x
+                </button>
+                {skills}
+              </div>
+            ))}
+            <input
+              type="text"
+              name="skills"
+              id="skills"
+              data-index={props.index}
+              value={props.skills}
+              onChange={props.handleChange}
+              onKeyDown={props.handleAddSkills}
+              placeholder="Type a skill and press ENTER"
+              className="skills"
+            />
+          </section>
+        </div>
+        <div className="buttonsEdit">
+          <button onClick={props.handleDelete} data-index={props.index}>
+            Delete
+          </button>
+          <p>
+            <button onClick={props.handleCancel}>Cancel</button>
+            <button onClick={props.saveHandler}>Save</button>
+          </p>
+        </div>
+      </form>
+      <div
+        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive ? "invisible" : "visible"}`}
+      >
+        <p>
+          <span style={{ fontWeight: "bold" }}>{props.company} •</span>{" "}
+          {props.jobTitle}
+        </p>
+        <button onClick={props.setActive} className="editBtn">
+          <img src={edit} alt="Edit button image" />
+        </button>
+      </div>
     </>
   );
 }
