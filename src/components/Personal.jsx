@@ -65,109 +65,107 @@ export function PersonalInformation({
   return (
     <section onClick={onShow} className="outerSection">
       <h1>Personal Information</h1>
-      {isActive && (
-        <div className="personalDiv">
-          <form className="personalForm">
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={personalInfo.name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="number">Mobile No.</label>
-              <input
-                type="text"
-                name="number"
-                id="number"
-                value={personalInfo.number}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={personalInfo.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="socialMedia">Social Media</label>
-              <div
+      <div className={`personalDiv ${isActive ? "visible" : "invisible"}`}>
+        <form className={`personalForm ${isActive ? "visible" : "invisible"}`}>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={personalInfo.name}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="number">Mobile No.</label>
+            <input
+              type="text"
+              name="number"
+              id="number"
+              value={personalInfo.number}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={personalInfo.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="socialMedia">Social Media</label>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                backgroundColor: "rgb(255, 255, 255)",
+                width: "100%",
+                borderRadius: "10px",
+                boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+              }}
+              className="socialMediaBtns"
+            >
+              <button
+                className="socialMediaBtn"
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  backgroundColor: "rgb(255, 255, 255)",
-                  width: "100%",
-                  borderRadius: "10px",
-                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                  borderRadius: "10px 0 0 10px",
+                  backgroundColor:
+                    socialMediaVal === 0 ? "#c0c0c0" : "oklch(0.961151 0 0)",
                 }}
-                className="socialMediaBtns"
+                id="0"
+                onClick={socialMediaHandler}
               >
-                <button
-                  className="socialMediaBtn"
-                  style={{
-                    borderRadius: "10px 0 0 10px",
-                    backgroundColor:
-                      socialMediaVal === 0 ? "#c0c0c0" : "rgb(255, 255, 255)",
-                  }}
-                  id="0"
-                  onClick={socialMediaHandler}
-                >
-                  <img
-                    style={{ pointerEvents: "none" }}
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-plain.svg"
-                  />
-                </button>
-
-                <button
-                  className="socialMediaBtn"
-                  style={{
-                    backgroundColor:
-                      socialMediaVal === 1 ? "#c0c0c0" : "rgb(255, 255, 255)",
-                  }}
-                  id="1"
-                  onClick={socialMediaHandler}
-                >
-                  <img
-                    style={{ pointerEvents: "none" }}
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
-                  />
-                </button>
-
-                <button
-                  className="socialMediaBtn"
-                  style={{
-                    backgroundColor:
-                      socialMediaVal === 2 ? "#c0c0c0" : "rgb(255, 255, 255)",
-                  }}
-                  id="2"
-                  onClick={socialMediaHandler}
-                >
-                  <img
-                    style={{ pointerEvents: "none" }}
-                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/twitter/twitter-original.svg"
-                  />
-                </button>
-                <input
-                  type="text"
-                  name="socialMedia"
-                  id="socialMedia"
-                  value={personalInfo.socialMedia}
-                  onChange={handleInputChange}
+                <img
+                  style={{ pointerEvents: "none" }}
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-plain.svg"
                 />
-              </div>
+              </button>
+
+              <button
+                className="socialMediaBtn"
+                style={{
+                  backgroundColor:
+                    socialMediaVal === 1 ? "#c0c0c0" : "oklch(0.961151 0 0)",
+                }}
+                id="1"
+                onClick={socialMediaHandler}
+              >
+                <img
+                  style={{ pointerEvents: "none" }}
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                />
+              </button>
+
+              <button
+                className="socialMediaBtn"
+                style={{
+                  backgroundColor:
+                    socialMediaVal === 2 ? "#c0c0c0" : "oklch(0.961151 0 0)",
+                }}
+                id="2"
+                onClick={socialMediaHandler}
+              >
+                <img
+                  style={{ pointerEvents: "none" }}
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/twitter/twitter-original.svg"
+                />
+              </button>
+              <input
+                type="text"
+                name="socialMedia"
+                id="socialMedia"
+                value={personalInfo.socialMedia}
+                onChange={handleInputChange}
+              />
             </div>
-          </form>
-        </div>
-      )}
+          </div>
+        </form>
+      </div>
     </section>
   );
 }
