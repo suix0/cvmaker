@@ -171,10 +171,12 @@ img {
   margin: 0 !important;
   padding: 0 !important;
   opacity: 0;
+  transform: rotateX(90deg) translateY(100px);
   transition:
     height 0.2s ease,
     margin-top 0.2s ease,
-    opacity 0.2s ease;
+    opacity,
+    transform 0.3s ease;
 }
 
 .personalDiv.visible,
@@ -183,10 +185,12 @@ img {
   margin-top: 3rem;
   opacity: 1;
   background-color: rgb(226, 226, 226);
+  transform: rotateX(0);
   transition:
     height 0.2s ease,
     margin-top 0.2s ease,
-    opacity 0.1s ease;
+    opacity 0.1s ease,
+    transform 0.3s ease;
 }
 
 .container {
@@ -199,12 +203,14 @@ img {
   opacity: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+  transform: rotateX(90deg) translateY(100px);
   visibility: hidden;
   cursor: default;
   transition:
     height 0.2s ease,
     opacity 0.1s ease,
-    margin 0.2s ease;
+    margin 0.2s ease,
+    transform 0.2s ease;
 }
 
 .container.visible,
@@ -212,10 +218,12 @@ img {
   height: auto !important;
   opacity: 1 !important;
   visibility: visible;
+  transform: rotateX(0);
   transition:
     height 0.2s ease,
     opacity 0.1s ease,
-    margin 0.2s ease;
+    margin 0.2s ease,
+    transform 0.2s ease;
 }
 
 .outerSection h1 {
@@ -389,4 +397,43 @@ textarea {
 .addBtnContainer button {
   padding: 0.3rem;
   font-size: 0.9rem;
+}
+
+.forms.invisible,
+.forms.invisible * {
+  height: 0 !important;
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
+  padding: 0;
+  margin: 0;
+  transform: rotateX(90deg);
+  transition:
+    visibility,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.forms.visible,
+.forms.visible * {
+  opacity: 1;
+  visibility: visible;
+  transform: rotateX(0);
+  transition:
+    visibility 0.2s,
+    opacity 0.4s ease,
+    transform 0.2s ease;
+}
+
+.innerSections.invisible,
+.innerSections1.invisible,
+.innerSections.invisible *,
+.innerSections1.invisible * {
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  opacity: 0;
+  visibility: hidden;
 }
