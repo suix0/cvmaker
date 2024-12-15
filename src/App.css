@@ -172,9 +172,9 @@ img {
   padding: 0 !important;
   opacity: 0;
   transition:
-    height 0.2s,
-    margin-top 0.2s,
-    opacity 0.1s;
+    height 0.2s ease,
+    margin-top 0.2s ease,
+    opacity 0.1s ease;
 }
 
 .personalDiv.visible,
@@ -184,9 +184,9 @@ img {
   opacity: 1;
   background-color: rgb(226, 226, 226);
   transition:
-    height 0.2s,
-    margin-top 0.2s,
-    opacity 0.1s;
+    height 0.2s ease,
+    margin-top 0.2s ease,
+    opacity 0.1 ease;
 }
 
 .container {
@@ -199,23 +199,25 @@ img {
   opacity: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+  visibility: hidden;
   cursor: default;
   transition:
-    height 0.2s,
-    opacity 0.2s,
-    margin 0.2s,
-    padding 0.2s;
+    height 0.2s ease,
+    opacity 0.2s ease,
+    margin 0.2s ease,
+    padding 0.2s ease;
 }
 
 .container.visible,
 .container.visible * {
   height: auto !important;
   opacity: 1 !important;
+  visibility: visible;
   transition:
-    height 0.2s,
-    opacity 0.2s,
-    margin 0.2s,
-    padding 0.2s;
+    height 0.2s ease,
+    opacity 0.2s ease,
+    margin 0.2s ease,
+    padding 0.2s ease;
 }
 
 .outerSection h1 {

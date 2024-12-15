@@ -281,14 +281,14 @@ function ExperienceInformation({
             )}
           </Fragment>
         ))}
-        {isActive && (
-          <div className="innerSections">
-            <p>Add Education</p>
+        {
+          <div className={`innerSections`}>
+            <p>Add Experience</p>
             <button onClick={() => setActiveEdit(0)} className="addBtn">
               <img src={add} alt="Pencil logo add button" />
             </button>
           </div>
-        )}
+        }
 
         {isActive && activeEdit === 0 && (
           <form className="forms">
