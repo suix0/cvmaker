@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import edit from "../assets/pencil-box.svg";
 import add from "../assets/plus-box.svg";
 
@@ -229,11 +229,33 @@ function ExperienceInformation({
   return (
     <section onClick={onShow} className="outerSection">
       <h1>Experience</h1>
-      {isActive &&
-        initialExperienceData.map((experience, index) => (
-          <>
+      <div className={`container ${isActive ? "visible" : "invisible"}`}>
+        {initialExperienceData.map((experience, index) => (
+          <Fragment key={crypto.randomUUID()}>
             {index === 0 ? (
-              <p style={{ marginBottom: "3rem" }}></p>
+              <>
+                <ExperienceSection
+                  company={experience.company}
+                  jobTitle={experience.jobTitle}
+                  description={experience.description}
+                  date={experience.date}
+                  location={experience.location}
+                  skills={experience.skills}
+                  skillsArr={experience.skillsArr}
+                  key={experience.id}
+                  index={experience.id}
+                  isActive={activeEdit === experience.id}
+                  setActive={() => setActiveEdit(experience.id)}
+                  handleChange={handleFormInputChange}
+                  handleAddSkills={handleExistingSkillsArray}
+                  handleCancel={() => setActiveEdit(null)}
+                  handleDelete={deleteExperienceSection}
+                  handleDeleteSkill={removeSkillExistingData}
+                  handleEnter={preventEnterSubmission}
+                  saveHandler={saveEdit}
+                  isActiveDisplay={isActive}
+                ></ExperienceSection>
+              </>
             ) : (
               <ExperienceSection
                 company={experience.company}
@@ -254,121 +276,123 @@ function ExperienceInformation({
                 handleDeleteSkill={removeSkillExistingData}
                 handleEnter={preventEnterSubmission}
                 saveHandler={saveEdit}
+                isActiveDisplay={isActive}
               ></ExperienceSection>
             )}
-          </>
+          </Fragment>
         ))}
-      {isActive && (
-        <div className="innerSections">
-          <p>Add Experience</p>
-          <button onClick={() => setActiveEdit(0)} className="addBtn">
-            <img src={add} alt="Pencil logo add button" />
-          </button>
-        </div>
-      )}
-
-      {isActive && activeEdit === 0 && (
-        <form className="forms">
-          <div className="formContainer">
-            <div>
-              <label htmlFor="company">Company</label>
-              <input
-                type="text"
-                name="company"
-                id="company"
-                value={newData.company}
-                onChange={handleAddFormInputChange}
-                onKeyDown={preventEnterSubmission}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="jobTitle">Job Title</label>
-              <input
-                type="text"
-                name="jobTitle"
-                id="jobTitle"
-                value={newData.jobTitle}
-                onChange={handleAddFormInputChange}
-                onKeyDown={preventEnterSubmission}
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="text"
-              name="description"
-              id="description"
-              value={newData.description}
-              onChange={handleAddFormInputChange}
-              rows={10}
-              style={{
-                whiteSspace: "pre-wrap",
-                width: "100%",
-                resize: "vertical",
-              }}
-            />
-          </div>
-
-          <div className="formContainer">
-            <div>
-              <label htmlFor="date">Date</label>
-              <input
-                type="text"
-                name="date"
-                id="date"
-                value={newData.date}
-                onChange={handleAddFormInputChange}
-                onKeyDown={preventEnterSubmission}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="location">Location</label>
-              <input
-                type="text"
-                name="location"
-                id="location"
-                value={newData.location}
-                onChange={handleAddFormInputChange}
-                onKeyDown={preventEnterSubmission}
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="skills">Skills</label>
-            <p className="skillsDiv">
-              {newData.skillsArr.map((skill) => (
-                <div key={crypto.randomUUID()}>
-                  <button onClick={removeSkillNewData} id={skill}>
-                    x
-                  </button>{" "}
-                  {skill}
-                </div>
-              ))}
-              <input
-                type="text"
-                name="skills"
-                id="skills"
-                value={newData.skills}
-                onChange={handleAddFormInputChange}
-                onKeyDown={handleSkillsArray}
-                placeholder="Type a skill and press ENTER"
-                className="skills"
-              />
-            </p>
-          </div>
-          <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
-            <button type="submit" onClick={addNewExperienceData}>
-              Add
+        {isActive && (
+          <div className="innerSections">
+            <p>Add Education</p>
+            <button onClick={() => setActiveEdit(0)} className="addBtn">
+              <img src={add} alt="Pencil logo add button" />
             </button>
           </div>
-        </form>
-      )}
+        )}
+
+        {isActive && activeEdit === 0 && (
+          <form className="forms">
+            <div className="formContainer">
+              <div>
+                <label htmlFor="company">Company</label>
+                <input
+                  type="text"
+                  name="company"
+                  id="company"
+                  value={newData.company}
+                  onChange={handleAddFormInputChange}
+                  onKeyDown={preventEnterSubmission}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="jobTitle">Job Title</label>
+                <input
+                  type="text"
+                  name="jobTitle"
+                  id="jobTitle"
+                  value={newData.jobTitle}
+                  onChange={handleAddFormInputChange}
+                  onKeyDown={preventEnterSubmission}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="description">Description</label>
+              <textarea
+                type="text"
+                name="description"
+                id="description"
+                value={newData.description}
+                onChange={handleAddFormInputChange}
+                rows={10}
+                style={{
+                  whiteSspace: "pre-wrap",
+                  width: "100%",
+                  resize: "vertical",
+                }}
+              />
+            </div>
+
+            <div className="formContainer">
+              <div>
+                <label htmlFor="date">Date</label>
+                <input
+                  type="text"
+                  name="date"
+                  id="date"
+                  value={newData.date}
+                  onChange={handleAddFormInputChange}
+                  onKeyDown={preventEnterSubmission}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="location">Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  id="location"
+                  value={newData.location}
+                  onChange={handleAddFormInputChange}
+                  onKeyDown={preventEnterSubmission}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="skills">Skills</label>
+              <p className="skillsDiv">
+                {newData.skillsArr.map((skill) => (
+                  <div key={crypto.randomUUID()}>
+                    <button onClick={removeSkillNewData} id={skill}>
+                      x
+                    </button>{" "}
+                    {skill}
+                  </div>
+                ))}
+                <input
+                  type="text"
+                  name="skills"
+                  id="skills"
+                  value={newData.skills}
+                  onChange={handleAddFormInputChange}
+                  onKeyDown={handleSkillsArray}
+                  placeholder="Type a skill and press ENTER"
+                  className="skills"
+                />
+              </p>
+            </div>
+            <div className="addBtnContainer">
+              <button onClick={() => setActiveEdit(null)}>Cancel</button>
+              <button type="submit" onClick={addNewExperienceData}>
+                Add
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </section>
   );
 }
@@ -493,7 +517,9 @@ function ExperienceSection(props) {
           </div>
         </form>
       ) : (
-        <div className={props.index === 1 ? "innerSections1" : "innerSections"}>
+        <div
+          className={`${props.index === 1 ? "innerSections1" : "innerSections"}`}
+        >
           <p>
             <span style={{ fontWeight: "bold" }}>{props.company} •</span>{" "}
             {props.jobTitle}

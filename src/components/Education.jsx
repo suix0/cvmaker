@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import edit from "../assets/pencil-box.svg";
 import add from "../assets/plus-box.svg";
 
@@ -112,11 +112,29 @@ function EducationInformation({
   return (
     <section onClick={onShow} className="outerSection">
       <h1>Education</h1>
-      {isActive &&
-        initialEducationData.map((education, index) => (
-          <>
+      <div className={`container ${isActive ? "visible" : "invisible"}`}>
+        {initialEducationData.map((education, index) => (
+          <Fragment key={crypto.randomUUID()}>
             {index === 0 ? (
-              <p style={{ marginBottom: "3rem" }}></p>
+              <>
+                <EducationSection
+                  institution={education.institution}
+                  courseTitle={education.courseTitle}
+                  description={education.description}
+                  date={education.date}
+                  grade={education.grade}
+                  key={education.id}
+                  index={education.id}
+                  isActiveEdit={activeEdit === education.id}
+                  onEdit={() => setActiveEdit(education.id)}
+                  onCancel={() => setActiveEdit(null)}
+                  deleteHandler={deleteEducationData}
+                  changeHandler={inputHandler}
+                  enterHandler={handleEnterPress}
+                  submitHandler={submitHandler}
+                  isActive={isActive}
+                ></EducationSection>
+              </>
             ) : (
               <EducationSection
                 institution={education.institution}
@@ -133,98 +151,100 @@ function EducationInformation({
                 changeHandler={inputHandler}
                 enterHandler={handleEnterPress}
                 submitHandler={submitHandler}
+                isActive={isActive}
               ></EducationSection>
             )}
-          </>
+          </Fragment>
         ))}
-      {activeEdit === 0 ? (
-        <form onSubmit={newDataSubmitHandler} className="forms">
-          <p>Add Education</p>
-          <div className="formContainer">
-            <div>
-              <label htmlFor="institution">Institution</label>
-              <input
-                type="text"
-                name="institution"
-                id="institution"
-                value={newData.institution}
-                onChange={newDataInputHandler}
-                onKeyDown={handleEnterPress}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="courseTitle">Course Title</label>
-              <input
-                type="text"
-                name="courseTitle"
-                id="courseTitle"
-                value={newData.courseTitle}
-                onChange={newDataInputHandler}
-                onKeyDown={handleEnterPress}
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="text"
-              name="description"
-              id="description"
-              value={newData.description}
-              onChange={newDataInputHandler}
-              onKeyDown={handleEnterPress}
-              rows={10}
-              style={{
-                width: "100%",
-                resize: "vertical",
-              }}
-            />
-          </div>
-
-          <div className="formContainer">
-            <div>
-              <label htmlFor="date">Date</label>
-              <input
-                type="text"
-                name="date"
-                id="date"
-                value={newData.date}
-                onChange={newDataInputHandler}
-                onKeyDown={handleEnterPress}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="grade">Grade</label>
-              <input
-                type="text"
-                name="grade"
-                id="grade"
-                value={newData.grade}
-                onChange={newDataInputHandler}
-                onKeyDown={handleEnterPress}
-              />
-            </div>
-          </div>
-          <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
-            <button type="submit" onClick={newDataSubmitHandler}>
-              Add
-            </button>
-          </div>
-        </form>
-      ) : (
-        isActive && (
-          <div className="innerSections">
+        {activeEdit === 0 ? (
+          <form onSubmit={newDataSubmitHandler} className="forms">
             <p>Add Education</p>
-            <button onClick={() => setActiveEdit(0)} className="addBtn">
-              <img src={add} alt="Pencil logo add button" />
-            </button>
-          </div>
-        )
-      )}
+            <div className="formContainer">
+              <div>
+                <label htmlFor="institution">Institution</label>
+                <input
+                  type="text"
+                  name="institution"
+                  id="institution"
+                  value={newData.institution}
+                  onChange={newDataInputHandler}
+                  onKeyDown={handleEnterPress}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="courseTitle">Course Title</label>
+                <input
+                  type="text"
+                  name="courseTitle"
+                  id="courseTitle"
+                  value={newData.courseTitle}
+                  onChange={newDataInputHandler}
+                  onKeyDown={handleEnterPress}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="description">Description</label>
+              <textarea
+                type="text"
+                name="description"
+                id="description"
+                value={newData.description}
+                onChange={newDataInputHandler}
+                onKeyDown={handleEnterPress}
+                rows={10}
+                style={{
+                  width: "100%",
+                  resize: "vertical",
+                }}
+              />
+            </div>
+
+            <div className="formContainer">
+              <div>
+                <label htmlFor="date">Date</label>
+                <input
+                  type="text"
+                  name="date"
+                  id="date"
+                  value={newData.date}
+                  onChange={newDataInputHandler}
+                  onKeyDown={handleEnterPress}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="grade">Grade</label>
+                <input
+                  type="text"
+                  name="grade"
+                  id="grade"
+                  value={newData.grade}
+                  onChange={newDataInputHandler}
+                  onKeyDown={handleEnterPress}
+                />
+              </div>
+            </div>
+            <div className="addBtnContainer">
+              <button onClick={() => setActiveEdit(null)}>Cancel</button>
+              <button type="submit" onClick={newDataSubmitHandler}>
+                Add
+              </button>
+            </div>
+          </form>
+        ) : (
+          isActive && (
+            <div className="innerSections">
+              <p>Add Education</p>
+              <button onClick={() => setActiveEdit(0)} className="addBtn">
+                <img src={add} alt="Pencil logo add button" />
+              </button>
+            </div>
+          )
+        )}
+      </div>
     </section>
   );
 }
@@ -322,7 +342,7 @@ function EducationSection(props) {
       ) : (
         <div
           key={props.institution}
-          className={props.index === 1 ? "innerSections1" : "innerSections"}
+          className={`${props.index === 1 ? "innerSections1" : "innerSections"}`}
         >
           <p>
             <span style={{ fontWeight: "bold" }}>{props.institution} • </span>{" "}

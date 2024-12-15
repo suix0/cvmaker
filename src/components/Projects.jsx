@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import edit from "../assets/pencil-box.svg";
 import add from "../assets/plus-box.svg";
 
@@ -154,11 +154,24 @@ function ProjectsInformation({
   return (
     <section onClick={onShow} className="outerSection">
       <h1>Projects</h1>
-      {isActive &&
-        initialProjectsData.map((projects, index) => (
-          <>
+      <div className={`container ${isActive ? "visible" : "invisible"}`}>
+        {initialProjectsData.map((projects, index) => (
+          <Fragment key={crypto.randomUUID()}>
             {index === 0 ? (
-              <p style={{ marginBottom: "3rem" }}></p>
+              <>
+                <ProjectSection
+                  projectObject={projects}
+                  key={projects.id}
+                  index={projects.id}
+                  isActive={activeEdit === projects.id}
+                  setActive={() => setActiveEdit(projects.id)}
+                  editInput={editProjectsData}
+                  cancelEdit={() => setActiveEdit(null)}
+                  preventEnters={handleEnters}
+                  handleDelete={deleteProject}
+                  handleSave={saveEditToDisplay}
+                ></ProjectSection>
+              </>
             ) : (
               <ProjectSection
                 projectObject={projects}
@@ -173,90 +186,91 @@ function ProjectsInformation({
                 handleSave={saveEditToDisplay}
               ></ProjectSection>
             )}
-          </>
+          </Fragment>
         ))}
-      {isActive && (
-        <div className="innerSections">
-          <p>Add Project</p>
-          <button onClick={() => setActiveEdit(0)} className="addBtn">
-            <img src={add} alt="Pencil logo add button" />
-          </button>
-        </div>
-      )}
-      {isActive && activeEdit === 0 && (
-        <form className="forms">
-          <div className="formContainer">
-            <div>
-              <label htmlFor="projectName">Project Name</label>
-              <input
-                type="text"
-                id="projectName"
-                name="projectName"
-                value={newProjectsData.projectName}
-                onChange={handleInputChangeNewData}
-                onKeyDown={handleEnters}
-              />
+        {isActive && (
+          <div className="innerSections">
+            <p>Add Project</p>
+            <button onClick={() => setActiveEdit(0)} className="addBtn">
+              <img src={add} alt="Pencil logo add button" />
+            </button>
+          </div>
+        )}
+        {isActive && activeEdit === 0 && (
+          <form className="forms">
+            <div className="formContainer">
+              <div>
+                <label htmlFor="projectName">Project Name</label>
+                <input
+                  type="text"
+                  id="projectName"
+                  name="projectName"
+                  value={newProjectsData.projectName}
+                  onChange={handleInputChangeNewData}
+                  onKeyDown={handleEnters}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subHeading">Subheading</label>
+                <input
+                  type="text"
+                  id="subHeading"
+                  name="subHeading"
+                  value={newProjectsData.subHeading}
+                  onChange={handleInputChangeNewData}
+                  onKeyDown={handleEnters}
+                />
+              </div>
             </div>
 
             <div>
-              <label htmlFor="subHeading">Subheading</label>
-              <input
+              <label htmlFor="description">Description</label>
+              <textarea
                 type="text"
-                id="subHeading"
-                name="subHeading"
-                value={newProjectsData.subHeading}
+                id="description"
+                name="description"
+                value={newProjectsData.description}
                 onChange={handleInputChangeNewData}
-                onKeyDown={handleEnters}
+                rows={10}
+                style={{
+                  width: "100%",
+                  resize: "vertical",
+                }}
               />
             </div>
-          </div>
+            <div className="formContainer">
+              <div>
+                <label htmlFor="projectLink">Project Link</label>
+                <input
+                  type="text"
+                  id="projectLink"
+                  name="projectLink"
+                  value={newProjectsData.projectLink}
+                  onChange={handleInputChangeNewData}
+                  onKeyDown={handleEnters}
+                />
+              </div>
 
-          <div>
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="text"
-              id="description"
-              name="description"
-              value={newProjectsData.description}
-              onChange={handleInputChangeNewData}
-              rows={10}
-              style={{
-                width: "100%",
-                resize: "vertical",
-              }}
-            />
-          </div>
-          <div className="formContainer">
-            <div>
-              <label htmlFor="projectLink">Project Link</label>
-              <input
-                type="text"
-                id="projectLink"
-                name="projectLink"
-                value={newProjectsData.projectLink}
-                onChange={handleInputChangeNewData}
-                onKeyDown={handleEnters}
-              />
+              <div>
+                <label htmlFor="date">Date</label>
+                <input
+                  type="text"
+                  id="date"
+                  name="date"
+                  value={newProjectsData.date}
+                  onChange={handleInputChangeNewData}
+                  onKeyDown={handleEnters}
+                />
+              </div>
             </div>
-
-            <div>
-              <label htmlFor="date">Date</label>
-              <input
-                type="text"
-                id="date"
-                name="date"
-                value={newProjectsData.date}
-                onChange={handleInputChangeNewData}
-                onKeyDown={handleEnters}
-              />
+            <div className="addBtnContainer">
+              <button onClick={() => setActiveEdit(null)}>Cancel</button>
+              <button onClick={addNewProjectsData}>Add</button>
             </div>
-          </div>
-          <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
-            <button onClick={addNewProjectsData}>Add</button>
-          </div>
-        </form>
-      )}
+          </form>
+        )}
+      </div>
     </section>
   );
 }
