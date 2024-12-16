@@ -134,6 +134,7 @@ function ProjectsInformation({
       projectLink: "",
       date: "",
     }); // Reset the new project data for next addition
+    setActiveEdit(null);
   }
 
   function deleteProject(e) {

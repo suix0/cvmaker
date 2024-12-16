@@ -110,6 +110,7 @@ function ExperienceInformation({
       skills: "",
       skillsArr: [],
     });
+    setActiveEdit(null);
   }
 
   // Adding skill to yet to add experience
