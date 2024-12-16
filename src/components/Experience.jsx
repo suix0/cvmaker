@@ -222,7 +222,8 @@ function ExperienceInformation({
     setExperienceCvDisplay(newExperienceData);
   }
 
-  function saveEdit() {
+  function saveEdit(e) {
+    e.preventDefault();
     setExperienceCvDisplay(initialExperienceData);
     setActiveEdit(null);
   }

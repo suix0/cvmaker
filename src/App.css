@@ -221,7 +221,9 @@ img {
   gap: 1rem;
 }
 
-.collapse {
+.collapse,
+.collapse > *,
+.collapse div > * {
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -304,6 +306,8 @@ textarea {
 
 .skillsDiv input {
   box-shadow: none !important;
+  width: fit-content;
+  flex-grow: 1;
 }
 
 .skillsDiv div {

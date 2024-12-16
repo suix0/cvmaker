@@ -4,7 +4,11 @@ import { PersonalInformation, PersonalInformationCvOutput } from "./Personal";
 import { EducationInformation, EducationCvDisplay } from "./Education";
 import { ExperienceInformation, ExperienceCvDisplay } from "./Experience";
 import { ProjectsInformation, ProjectsCvDisplay } from "./Projects";
-import { CustomSectionForm, CustomSectionCvDisplay } from "./CustomSection";
+import {
+  CustomSectionFormEdit,
+  CustomSectionFormAdd,
+  CustomSectionCvDisplay,
+} from "./CustomSection";
 import educationData from "../data/educationData";
 import experienceData from "../data/experienceData";
 import projects from "../data/projectsData";
@@ -375,18 +379,18 @@ function CustomSectionInformation(props) {
       <div className={`container ${props.isActive ? "visible" : "invisible"}`}>
         {props.customSection.customSectionData.map((customData) => (
           <React.Fragment key={customData.id}>
-            <CustomSectionForm
+            <CustomSectionFormEdit
               formData={customData}
               key={customData.id}
               inputChangeHandler={editInputFormHandler}
               submitHandler={addFormData}
               submitSave={props.editSubmitHandler}
               enterHandler={preventEnters}
-              cancelFormHandler={cancelForm}
-              isActive={formActive === customData.id}
+              cancelHandler={cancelForm}
+              isActiveEdit={formActive === customData.id}
               index={customData.id}
               deleteHandler={deleteInnerSections}
-            ></CustomSectionForm>
+            ></CustomSectionFormEdit>
             <div
               className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive && formActive === customData.id ? "invisible" : "visible"} ${props.isActive === false && "collapse"}`}
               key={crypto.randomUUID()}
@@ -406,13 +410,15 @@ function CustomSectionInformation(props) {
             </div>
           </React.Fragment>
         ))}
-        <div className="innerSections">
+        <div
+          className={`innerSections ${props.isActive && formActive === 0 ? "invisible" : "visible"}`}
+        >
           <p>Add Item</p>
           <button onClick={() => setFormActive(0)} className="addBtn">
             <img src={add} alt="Pencil logo add button" />
           </button>
         </div>
-        <CustomSectionForm
+        <CustomSectionFormAdd
           formData={initialFormData}
           inputChangeHandler={inputFormHandler}
           submitHandler={addFormData}
@@ -420,9 +426,8 @@ function CustomSectionInformation(props) {
           enterHandler={preventEnters}
           cancelHandler={cancelForm}
           index={props.customSection.id}
-          cancelEditHandler={() => setFormActive(null)}
           isActive={props.isActive && formActive === 0}
-        ></CustomSectionForm>
+        ></CustomSectionFormAdd>
       </div>
     </section>
   );
