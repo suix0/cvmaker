@@ -226,6 +226,11 @@ function ExperienceInformation({
     setActiveEdit(null);
   }
 
+  function cancelHandler(e) {
+    e.preventDefault();
+    setActiveEdit(null);
+  }
+
   return (
     <section onClick={onShow} className="outerSection">
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -256,7 +261,7 @@ function ExperienceInformation({
             setActive={() => setActiveEdit(experience.id)}
             handleChange={handleFormInputChange}
             handleAddSkills={handleExistingSkillsArray}
-            handleCancel={() => setActiveEdit(null)}
+            handleCancel={cancelHandler}
             handleDelete={deleteExperienceSection}
             handleDeleteSkill={removeSkillExistingData}
             handleEnter={preventEnterSubmission}
@@ -360,7 +365,7 @@ function ExperienceInformation({
             </section>
           </div>
           <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button onClick={cancelHandler}>Cancel</button>
             <button type="submit" onClick={addNewExperienceData}>
               Add
             </button>

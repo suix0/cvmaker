@@ -222,7 +222,7 @@ function EducationInformation({
             </div>
           </div>
           <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button onClick={cancelHandler}>Cancel</button>
             <button type="submit" onClick={newDataSubmitHandler}>
               Add
             </button>

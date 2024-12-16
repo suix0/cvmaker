@@ -151,6 +151,11 @@ function ProjectsInformation({
     setActiveEdit(null);
   }
 
+  function cancelHandler(e) {
+    e.preventDefault();
+    setActiveEdit(null);
+  }
+
   return (
     <section onClick={onShow} className="outerSection">
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -175,7 +180,7 @@ function ProjectsInformation({
             isActiveDisplay={isActive}
             setActive={() => setActiveEdit(projects.id)}
             editInput={editProjectsData}
-            cancelEdit={() => setActiveEdit(null)}
+            cancelEdit={cancelHandler}
             preventEnters={handleEnters}
             handleDelete={deleteProject}
             handleSave={saveEditToDisplay}
@@ -251,12 +256,13 @@ function ProjectsInformation({
             </div>
           </div>
           <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button onClick={cancelHandler}>Cancel</button>
             <button onClick={addNewProjectsData}>Add</button>
           </div>
         </form>
         <div
-          className={`innerSections ${isActive && activeEdit === 0 ? "invisible" : "visible"}`}
+          className={`innerSections ${isActive && activeEdit === 0 ? "invisible" : "visible"}
+          `}
         >
           <p>Add Project</p>
           <button onClick={() => setActiveEdit(0)} className="addBtn">
