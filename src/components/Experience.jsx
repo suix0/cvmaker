@@ -110,6 +110,7 @@ function ExperienceInformation({
       skills: "",
       skillsArr: [],
     });
+    setActiveEdit(null);
   }
 
   // Adding skill to yet to add experience
@@ -221,8 +222,14 @@ function ExperienceInformation({
     setExperienceCvDisplay(newExperienceData);
   }
 
-  function saveEdit() {
+  function saveEdit(e) {
+    e.preventDefault();
     setExperienceCvDisplay(initialExperienceData);
+    setActiveEdit(null);
+  }
+
+  function cancelHandler(e) {
+    e.preventDefault();
     setActiveEdit(null);
   }
 
@@ -256,7 +263,7 @@ function ExperienceInformation({
             setActive={() => setActiveEdit(experience.id)}
             handleChange={handleFormInputChange}
             handleAddSkills={handleExistingSkillsArray}
-            handleCancel={() => setActiveEdit(null)}
+            handleCancel={cancelHandler}
             handleDelete={deleteExperienceSection}
             handleDeleteSkill={removeSkillExistingData}
             handleEnter={preventEnterSubmission}
@@ -265,7 +272,7 @@ function ExperienceInformation({
           ></ExperienceSection>
         ))}
         <form
-          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"} ${isActive === false && "collapse"}`}
         >
           <div className="formContainer">
             <div>
@@ -360,7 +367,7 @@ function ExperienceInformation({
             </section>
           </div>
           <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button onClick={cancelHandler}>Cancel</button>
             <button type="submit" onClick={addNewExperienceData}>
               Add
             </button>
@@ -382,7 +389,9 @@ function ExperienceInformation({
 function ExperienceSection(props) {
   return (
     <>
-      <form className={`forms ${props.isActive ? "visible" : "invisible"}`}>
+      <form
+        className={`forms ${props.isActive && props.isActiveDisplay ? "visible" : "invisible"} ${props.isActiveDisplay === false && "collapse"}`}
+      >
         <h4>Edit Experience</h4>
         <div className="formContainer">
           <div>
@@ -499,7 +508,7 @@ function ExperienceSection(props) {
         </div>
       </form>
       <div
-        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive ? "invisible" : "visible"}`}
+        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive && props.isActiveDisplay ? "invisible" : "visible"} ${props.isActiveDisplay === false && "collapse"}`}
       >
         <p>
           <span style={{ fontWeight: "bold" }}>{props.company} •</span>{" "}

@@ -150,7 +150,7 @@ function EducationInformation({
         ))}
         <form
           onSubmit={newDataSubmitHandler}
-          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"} ${isActive === false && "collapse"}`}
         >
           <p>Add Education</p>
           <div className="formContainer">
@@ -222,7 +222,7 @@ function EducationInformation({
             </div>
           </div>
           <div className="addBtnContainer">
-            <button onClick={() => setActiveEdit(null)}>Cancel</button>
+            <button onClick={cancelHandler}>Cancel</button>
             <button type="submit" onClick={newDataSubmitHandler}>
               Add
             </button>
@@ -244,7 +244,9 @@ function EducationInformation({
 function EducationSection(props) {
   return (
     <>
-      <form className={`forms ${props.isActiveEdit ? "visible" : "invisible"}`}>
+      <form
+        className={`forms ${props.isActiveEdit && props.isActive ? "visible" : "invisible"} ${props.isActive === false && "collapse"}`}
+      >
         <h4>Edit Education</h4>
         <div className="formContainer">
           <div>
@@ -332,7 +334,7 @@ function EducationSection(props) {
       </form>
       <div
         key={props.institution}
-        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActiveEdit ? "invisible" : "visible"}`}
+        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActiveEdit && props.isActive ? "invisible" : "visible"} ${props.isActive === false && "collapse"}`}
       >
         <p>
           <span style={{ fontWeight: "bold" }}>{props.institution} • </span>{" "}

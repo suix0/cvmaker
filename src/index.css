@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+.root {
+  height: 100svh !important;
+}
+
 button {
   cursor: pointer;
 }
