@@ -37,7 +37,7 @@ function CustomSectionCvDisplay(props) {
 
 function CustomSectionForm(props) {
   return (
-    <form className="forms">
+    <form className={`forms ${props.isActive ? "visible" : "invisible"}`}>
       <div className="formContainer">
         <div>
           <label htmlFor="heading">Heading</label>
@@ -107,6 +107,13 @@ function CustomSectionForm(props) {
         </div>
       </div>
       {props.isActive ? (
+        <div className="addBtnContainer">
+          <button onClick={props.cancelHandler}>Cancel</button>
+          <button onClick={props.submitHandler} data-index={props.index}>
+            Add
+          </button>
+        </div>
+      ) : (
         <div className="buttonsEdit">
           <button data-index={props.index} onClick={props.deleteHandler}>
             Delete
@@ -115,13 +122,6 @@ function CustomSectionForm(props) {
             <button onClick={props.cancelFormHandler}>Cancel</button>
             <button onClick={props.submitSave}>Save</button>
           </p>
-        </div>
-      ) : (
-        <div className="addBtnContainer">
-          <button onClick={props.cancelHandler}>Cancel</button>
-          <button onClick={props.submitHandler} data-index={props.index}>
-            Add
-          </button>
         </div>
       )}
     </form>

@@ -172,6 +172,7 @@ function ProjectsInformation({
             key={projects.id}
             index={projects.id}
             isActive={activeEdit === projects.id}
+            isActiveDisplay={isActive}
             setActive={() => setActiveEdit(projects.id)}
             editInput={editProjectsData}
             cancelEdit={() => setActiveEdit(null)}
@@ -181,7 +182,7 @@ function ProjectsInformation({
           ></ProjectSection>
         ))}
         <form
-          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"} ${isActive === false && "collapse"}`}
         >
           <div className="formContainer">
             <div>
@@ -270,7 +271,9 @@ function ProjectsInformation({
 function ProjectSection(props) {
   return (
     <>
-      <form className={`forms ${props.isActive ? "visible" : "invisible"}`}>
+      <form
+        className={`forms ${props.isActive ? "visible" : "invisible"} ${props.isActiveDisplay === false && "collapse"}`}
+      >
         <div className="formContainer">
           <div>
             <label htmlFor="projectName">Project Name</label>
@@ -352,7 +355,7 @@ function ProjectSection(props) {
         </div>
       </form>
       <div
-        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive ? "invisible" : "visible"}`}
+        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive && props.isActiveDisplay ? "invisible" : "visible"} ${props.isActiveDisplay === false && "collapse"}`}
       >
         <p>
           <span style={{ fontWeight: "bold" }}>

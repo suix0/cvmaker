@@ -56,6 +56,7 @@ img {
   overflow: scroll;
   overflow-x: hidden;
   background-color: var(--second-clr);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .cvInputHeading {
@@ -144,28 +145,7 @@ img {
   border-radius: 10px;
 }
 
-.personalDiv {
-  opacity: 0;
-  height: 0;
-  margin-top: 0;
-  background-color: rgb(238, 238, 238);
-  transition:
-    height 0.2s,
-    margin-top 0.2s,
-    opacity 0.1s;
-}
-
-.personalForm {
-  opacity: 0;
-  height: 0;
-  background-color: rgb(238, 238, 238);
-  transition:
-    height 0.2s,
-    margin-top 0.2s,
-    opacity 0.1s;
-}
-
-.personalForm.invisible {
+.personalDiv.invisible {
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -176,8 +156,14 @@ img {
     transform 0.2s ease;
 }
 
-.personalDiv.visible,
-.personalForm.visible {
+.personalForm.invisible,
+.personalForm.invisible * {
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.personalDiv.visible {
   height: auto;
   margin-top: 3rem;
   opacity: 1;
@@ -211,7 +197,8 @@ img {
   transform: translateY(0);
   transition:
     opacity 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    margin 0.2s ease;
 }
 
 .outerSection h1 {
@@ -232,6 +219,13 @@ img {
   display: flex;
   flex: auto;
   gap: 1rem;
+}
+
+.collapse {
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  cursor: default !important;
 }
 
 .forms div > div {
@@ -387,8 +381,7 @@ textarea {
   font-size: 0.9rem;
 }
 
-.forms.invisible,
-.forms.invisible * {
+.forms.invisible {
   height: 0 !important;
   width: 0;
   opacity: 0;
@@ -398,25 +391,22 @@ textarea {
   transform: translateY(100px);
   transition:
     visibility,
-    opacity 0.2s ease,
+    opacity,
     transform 0.2s ease;
 }
 
-.forms.visible,
-.forms.visible * {
+.forms.visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
   transition:
-    visibility 0.1s,
-    opacity 0.2s ease,
+    visibility,
+    opacity,
     transform 0.2s ease;
 }
 
 .innerSections.invisible,
-.innerSections1.invisible,
-.innerSections.invisible *,
-.innerSections1.invisible * {
+.innerSections1.invisible {
   height: 0 !important;
   width: 0 !important;
   margin: 0;

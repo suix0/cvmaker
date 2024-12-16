@@ -265,7 +265,7 @@ function ExperienceInformation({
           ></ExperienceSection>
         ))}
         <form
-          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"}`}
+          className={`forms ${isActive && activeEdit === 0 ? "visible" : "invisible"} ${isActive === false && "collapse"}`}
         >
           <div className="formContainer">
             <div>
@@ -382,7 +382,9 @@ function ExperienceInformation({
 function ExperienceSection(props) {
   return (
     <>
-      <form className={`forms ${props.isActive ? "visible" : "invisible"}`}>
+      <form
+        className={`forms ${props.isActive && props.isActiveDisplay ? "visible" : "invisible"} ${props.isActiveDisplay === false && "collapse"}`}
+      >
         <h4>Edit Experience</h4>
         <div className="formContainer">
           <div>
@@ -499,7 +501,7 @@ function ExperienceSection(props) {
         </div>
       </form>
       <div
-        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive ? "invisible" : "visible"}`}
+        className={`${props.index === 1 ? "innerSections1" : "innerSections"} ${props.isActive && props.isActiveDisplay ? "invisible" : "visible"} ${props.isActiveDisplay === false && "collapse"}`}
       >
         <p>
           <span style={{ fontWeight: "bold" }}>{props.company} •</span>{" "}
