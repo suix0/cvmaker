@@ -71,12 +71,20 @@
   }
 
   .cvDisplayContainer > div {
-    transform: scale(0.9);
+    transform: scale(0.8);
+    width: 800px;
     background-color: #eeeeee;
+    height: 100%;
+    padding: 2rem;
   }
 
   .cvDisplayContainer {
     background-color: #31363f;
     width: 100% !important;
+  }
+
+  .personal > ul {
+    padding-left: 0;
+    gap: 1px;
   }
 }
