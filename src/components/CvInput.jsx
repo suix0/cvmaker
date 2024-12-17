@@ -139,7 +139,9 @@ function CvInput() {
               </span>
             </p>
           </div>
-          <button className="downloadBtn">Download PDF</button>
+          <button className="downloadBtn" onClick={() => toPDF()}>
+            Download PDF
+          </button>
         </div>
 
         <div className="cvForm">
