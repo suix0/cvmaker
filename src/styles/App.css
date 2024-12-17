@@ -57,6 +57,7 @@ img {
   overflow-x: hidden;
   background-color: var(--second-clr);
   font-family: Arial, Helvetica, sans-serif;
+  height: 100svh;
 }
 
 .cvInputHeading {

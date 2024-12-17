@@ -50,6 +50,7 @@ function CvInput() {
   const [customSectionTitle, setTitle] = useState("");
   const [customSection, setCustomSectionData] = useState([]);
   const [customSectionCvDisplay, setCustomSectionCvDisplay] = useState([]);
+
   // Personal info state change handler
   function handleIputPersonalInfo(e) {
     const { name, value } = e.target;
