@@ -11,4 +11,6 @@ A website for creating CV with ease.
 </ul>
 
 # Technologies used
-<li>HTML, CSS, JavaScript, React</li>
+<ul>
+  <li>HTML, CSS, JavaScript, React</li>
+</ul>
