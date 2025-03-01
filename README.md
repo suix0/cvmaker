@@ -37,6 +37,6 @@ What made this project really challenging is the fact that I did not learn Tailw
 
 Another challenge to point out was the transitions of the reference I tried to imitate in my project. Having to style transitions between accordions, while considering whether a section was opened or not and ensuring that the opened section remain while going between accordions.
 
-At the end of the day, it was a really fun and super challenging project for someone like me who just learned React. It was a good learning experience.
+At the end of the day, it was a really fun and super challenging project for someone like me who just learned React. I may not have made the best React code with this one, and I am aware of how messy it is, but I learned a lot from this. It was a good learning experience.
 
 Link for the reference I used for this project: https://cvcreator.khanhadi.com/
